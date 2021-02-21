@@ -1,7 +1,12 @@
 {
-    "w" : {
-        "from" : "rich.s"
+    "artifactCounts" : {
+        "after" : "1994-08-01",
+        "before" : "2021-02-20",
+        "owner" : "rich"
     },
-
-    "hello" : {}
+    "artifactSearch" : {
+        "after" : "1994-08-01",
+        "before" : "2021-02-20",
+        "owner" : "rich"
+    }
 }
