@@ -2,22 +2,28 @@ import React, { FunctionComponent, useState, useEffect, useContext } from "react
 import "./styles/styles.css";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { Home } from "./pages";
-import CorrespondenceSearchContext from "./contexts/ArtifactCountsContext";
+import ArtifactCountsContext from "./contexts/ArtifactContext";
 import ErrorBoundary from "./ErrorBoundary";
+import CorrespondenceAPI from "./hooks/correspondenceApi";
 
 const App: FunctionComponent<{}> = () => {
 
-  const [defaultCorrespondenceSearch] = useContext(CorrespondenceSearchContext);
-  const correspondenceSearch = useState(defaultCorrespondenceSearch);
+  useEffect(() => {
+    let token = CorrespondenceAPI.getAuthorizationToken();
+    sessionStorage.setItem("token", token);
+  }, []);
+
+  const [defaultValue] = useContext(ArtifactCountsContext);
+  const artifactCountsRequest = useState(defaultValue);
 
   return (
 
     <ErrorBoundary>
-      <CorrespondenceSearchContext.Provider value={correspondenceSearch}>
+      <ArtifactCountsContext.Provider value={artifactCountsRequest}>
         <Switch>
           <Route exact path="/" component={Home} />
         </Switch>
-      </CorrespondenceSearchContext.Provider>
+      </ArtifactCountsContext.Provider>
     </ErrorBoundary>
   );
 };
