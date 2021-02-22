@@ -12,14 +12,20 @@ const searchRequest: ArtifactSearchRequest = artifactSearch;
 
 const artifactContextState: ArtifactContextState = {
     countsRequest: countsRequest,
-    searchRequest: searchRequest
+    countsResponse: [],
+    searchRequest: searchRequest,
+    searchResponse: [],
+    maxBoxCount: 0,
+    monthSelected: 0
   };
   
   type ArtifactContextState = {
     countsRequest: ArtifactCountsRequest;
-    countsResponse?: ArtifactCountsResponse;
+    countsResponse: ArtifactCountsResponse[];
     searchRequest: ArtifactSearchRequest;
-    searchResponse?: ArtifactSearchResponse;
+    searchResponse: ArtifactSearchResponse[];
+    maxBoxCount: number;
+    monthSelected: number;
   };
   
   type ArtifactContextProps = [ArtifactContextState, React.Dispatch<React.SetStateAction<ArtifactContextState>>];

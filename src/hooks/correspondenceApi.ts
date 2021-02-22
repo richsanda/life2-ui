@@ -8,26 +8,26 @@ import {
 
 interface ICorrespondenceAPI {
   getAuthorizationToken: () => Promise<string>;
-  artifactCounts: (body: ArtifactCountsRequest) => Promise<ArtifactCountsResponse>;
-  artifactSearch: (body: ArtifactSearchRequest) => Promise<ArtifactSearchResponse>;
+  artifactCounts: (body: ArtifactCountsRequest) => Promise<ArtifactCountsResponse[]>;
+  artifactSearch: (body: ArtifactSearchRequest) => Promise<ArtifactSearchResponse[]>;
   artifactRead: (trove: string, key: string) => Promise<ArtifactReadResponse>;
 }
 
 class CorrespondenceAPI {
   public static getAuthorizationToken = () => {
-    /* let response = await axios.post<AuthResponse>('https://api.tsts.havail.sabre.com/v2/auth/token', 'grant_type=client_credentials', {
+    /* let response = await axios.post<AuthResponse>('https://localhost:8080/v2/auth/token', 'grant_type=client_credentials', {
             headers: {
-                'Authorization': 'Basic VmpFNldEQkVXRVV5VTBjNldEQTZXREE9OlJGaEZNbE5IV0RBPQ==',
+                'Authorization': 'Basic VssFNldEQksXRVV5VTBjNldEEWZXREE9OlJGaEZNbE5IV0RBPQ==',
                 'Accept': '',
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'ttl_seconds': '3600'
             },
         }) */
-    return "cmljaDp5YWhkdWRlNDc0Nw==";
+    return "";
   }
 
   public static artifactCounts = async (body: ArtifactCountsRequest) => {
-    let response = await CorrespondenceAPI.request<ArtifactCountsResponse, ArtifactCountsRequest>(
+    let response = await CorrespondenceAPI.request<ArtifactCountsResponse[], ArtifactCountsRequest>(
       "artifact/counts",
       "post",
       body
@@ -36,7 +36,7 @@ class CorrespondenceAPI {
   };
 
   public static artifactSearch = async (body: ArtifactSearchRequest) => {
-    let response = await CorrespondenceAPI.request<ArtifactSearchResponse, ArtifactSearchRequest>(
+    let response = await CorrespondenceAPI.request<ArtifactSearchResponse[], ArtifactSearchRequest>(
       "/artifacts",
       "post",
       body

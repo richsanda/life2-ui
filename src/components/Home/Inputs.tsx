@@ -1,20 +1,31 @@
 import React, { useContext, useState } from "react";
 import CorrespondenceApi  from "../../hooks/correspondenceApi";
 import ArtifactContext from "../../contexts/ArtifactContext";
+import { rangeOfYearMonthsWithCounts } from "../../utils/Utils";
 
 const Inputs = () => {
 
     const [artifactsContext, setArtifactsContext] = useContext(ArtifactContext);
-    const { countsRequest } = artifactsContext;
+    const { countsRequest, countsResponse } = artifactsContext;
 
-    const [token, setToken] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    const updateToken = () => {
+        sessionStorage.setItem("token", Buffer.from(`${username}:${password}`).toString('base64'));
+    }
 
     const counts = async () => {
+        updateToken();
         if (true) {
-          alert(countsRequest.after)
           CorrespondenceApi.artifactCounts(countsRequest)
             .then((response) => {
-              alert("success");
+                let [response2, maxBoxCount] = rangeOfYearMonthsWithCounts(1994, 2021, response)
+                setArtifactsContext({
+                    ...artifactsContext, 
+                    "countsResponse" : response2,
+                    "maxBoxCount" : maxBoxCount
+                });
             })
             .catch(() => {
               alert("error");
@@ -26,7 +37,8 @@ const Inputs = () => {
     return (
         <p className="input">
 
-            TOKEN: <input type="password" onChange={({ target }) => setToken(target.value)}></input>
+            username: <input type="text" onChange={({ target }) => { setUsername(target.value)}}></input>
+            password: <input type="password" onChange={({ target }) => { setPassword(target.value)}}></input>
             <button onClick={counts}><i>go !</i></button>
 
     &nbsp;&nbsp;&nbsp;&nbsp;from: <input type="text" data-ng-model="from" ng-keypress="enter($event)" />
