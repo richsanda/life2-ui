@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import ArtifactContext from "../../contexts/ArtifactContext";
+import CorrespondenceApi from "../../hooks/correspondenceApi";
+import ResultRow from "./ResultRow";
 
 const Results = () => {
+
+    const [artifactsContext, setArtifactsContext] = useContext(ArtifactContext);
+    const { searchResponse } = artifactsContext;
+
     return (
         <div id="results">
         {/* <div class="artifact-link" data-ng-repeat="artifact in artifacts" id="{{'artifact' + $index}}">
@@ -12,6 +19,11 @@ const Results = () => {
                 <div class="artifact-link-col">{{ '[' + artifact.subject + ']' }}</div>
             </div>
         </div> */}
+        {searchResponse.map((artifact, index) => {
+                return (
+                  <ResultRow artifact={artifact} index={index}/>
+                )
+            })}
     </div>
     );
 };

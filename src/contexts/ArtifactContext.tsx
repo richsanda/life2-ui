@@ -3,7 +3,8 @@ import {
     ArtifactCountsRequest, 
     ArtifactCountsResponse, 
     ArtifactSearchRequest, 
-    ArtifactSearchResponse 
+    ArtifactSearchResponse,
+    ArtifactReadResponse
 } from "../models";
 import { artifactCounts, artifactSearch } from "../utils/requestTemplates.json";
 
@@ -16,7 +17,9 @@ const artifactContextState: ArtifactContextState = {
     searchRequest: searchRequest,
     searchResponse: [],
     maxBoxCount: 0,
-    monthSelected: 0
+    monthSelected: -1,
+    from: [],
+    to: []
   };
   
   type ArtifactContextState = {
@@ -24,8 +27,11 @@ const artifactContextState: ArtifactContextState = {
     countsResponse: ArtifactCountsResponse[];
     searchRequest: ArtifactSearchRequest;
     searchResponse: ArtifactSearchResponse[];
+    readResponse?: ArtifactReadResponse;
     maxBoxCount: number;
     monthSelected: number;
+    from: string[];
+    to: string[];
   };
   
   type ArtifactContextProps = [ArtifactContextState, React.Dispatch<React.SetStateAction<ArtifactContextState>>];

@@ -6,7 +6,7 @@ import { rangeOfYearMonthsWithCounts } from "../../utils/Utils";
 const Inputs = () => {
 
     const [artifactsContext, setArtifactsContext] = useContext(ArtifactContext);
-    const { countsRequest, countsResponse } = artifactsContext;
+    const { countsRequest, searchRequest, from, to } = artifactsContext;
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -15,10 +15,25 @@ const Inputs = () => {
         sessionStorage.setItem("token", Buffer.from(`${username}:${password}`).toString('base64'));
     }
 
+    const updateFrom = (from: string) => {
+        setArtifactsContext({
+            ...artifactsContext, 
+            "from" : from.trim().length == 0 ? [] : from.split(/[ ,]+/)
+        })
+    }
+
+    const updateTo = (to: string) => {
+        setArtifactsContext({
+            ...artifactsContext, 
+            "to" : to.trim().length == 0 ? [] : to.split(/[ ,]+/)
+        })
+    }
+
     const counts = async () => {
         updateToken();
+
         if (true) {
-          CorrespondenceApi.artifactCounts(countsRequest)
+          CorrespondenceApi.artifactCounts({...countsRequest, "from": from, "to": to})
             .then((response) => {
                 let [response2, maxBoxCount] = rangeOfYearMonthsWithCounts(1994, 2021, response)
                 setArtifactsContext({
@@ -37,13 +52,13 @@ const Inputs = () => {
     return (
         <p className="input">
 
-            username: <input type="text" onChange={({ target }) => { setUsername(target.value)}}></input>
-            password: <input type="password" onChange={({ target }) => { setPassword(target.value)}}></input>
+            username: <input type="text" onChange={({ target }) => { setUsername(target.value) }}></input>
+            password: <input type="password" onChange={({ target }) => { setPassword(target.value) }}></input>
             <button onClick={counts}><i>go !</i></button>
 
-    &nbsp;&nbsp;&nbsp;&nbsp;from: <input type="text" data-ng-model="from" ng-keypress="enter($event)" />
-    to: <input type="text" data-ng-model="to" ng-keypress="enter($event)" />
-
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    from: <input type="text" onChange={({ target }) => { updateFrom(target.value) }} />
+    to: <input type="text" onChange={({ target }) => { updateTo(target.value) }} />
 
         </p>
     );
