@@ -49,8 +49,15 @@ const Inputs = () => {
         }
       };
 
+      function onKeyPress(event) {
+        var code = event.keyCode || event.which;
+        if(code === 13) { //13 is the enter keycode
+            counts();
+        } 
+    }
+
     return (
-        <p className="input">
+        <p className="input" onKeyPress={onKeyPress}>
 
             username: <input type="text" onChange={({ target }) => { setUsername(target.value) }}></input>
             password: <input type="password" onChange={({ target }) => { setPassword(target.value) }}></input>

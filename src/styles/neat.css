@@ -1,0 +1,144 @@
+html {
+  background-color: rgb(173, 187, 202);
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+  }
+  
+  .leftpane {
+      width: 20%;
+      height: 100%;
+      float: left;
+      background-color: rgb(173, 187, 202);
+      border-collapse: collapse;
+  }
+  
+  .middlepane {
+      height: 60%;
+      float: left;
+      background-color: rgb(173, 187, 202);
+      border-collapse: collapse;
+  }
+
+  .feature-container {
+    display: flex;
+  }
+
+  .featurepane {
+    flex: 1;
+    text-align: center;
+  }
+
+  .commentarypane {
+    flex: 1;
+  }
+
+.commentarypane textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: rgb(173, 187, 202);
+  }
+  
+  .rightpane {
+    width: 70%;
+    height: 100%;
+    position: relative;
+    float: right;
+    background-color: rgb(173, 187, 202);
+    border-collapse: collapse;
+  }
+  
+  .toppane {
+    width: 100%;
+    height: 100px;
+    border-collapse: collapse;
+    background-color: rgb(173, 187, 202);
+}
+
+  .center-fit {
+    max-width: 80%;
+    max-height: 90vh;
+    margin: auto;
+}
+
+div.neat-folder, div.neat-item {
+    margin: 2px;
+}
+
+div.neat-folder:hover, div.neat-item:hover {
+    opacity: 40%;
+    cursor: pointer;
+}
+
+div.selected {
+    background-color: rgb(118, 129, 141);
+}
+
+
+
+.drag-drop-zone {
+    padding: 2rem;
+    text-align: center;
+    background: #07F;
+    border-radius: 0.5rem;
+    box-shadow: 5px 5px 10px #C0C0C0;
+  }
+  .drag-drop-zone p {
+    color: #FFF;
+  }
+  .drag-drop-zone.inside-drag-area {
+    opacity: 0.7;
+  }
+  .dropped-files li {
+    color: #07F;
+    padding: 3px;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  figure {
+    width: 600px;
+    background-repeat: no-repeat;
+  }
+  
+  figure:hover img {
+    opacity: 0;
+  }
+/*   
+  img {
+    display: block;
+    width: 100%;
+    pointer-events: none;
+  } */
+
+  /* #root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw; 
+  }*/
+
+.button {
+  background-color: rgb(118, 129, 141);
+}
+
+  .button:hover {
+    opacity: 40%;
+    cursor: pointer;
+  }
+
+  .prev {
+    float: left;
+    width: 10%;
+    height: 100%;
+  }
+  .next {
+    float: right;
+    width: 10%;
+    height: 100%;
+  }

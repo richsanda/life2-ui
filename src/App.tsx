@@ -1,10 +1,13 @@
 import React, { FunctionComponent, useState, useEffect, useContext } from "react";
 import "./styles/styles.css";
+import "./styles/neat.css";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { Home } from "./pages";
-import ArtifactCountsContext from "./contexts/ArtifactContext";
+import ArtifactContext from "./contexts/ArtifactContext";
+import NeatContext from "./contexts/NeatContext";
 import ErrorBoundary from "./ErrorBoundary";
 import CorrespondenceAPI from "./hooks/correspondenceApi";
+import Neat from "./pages/Neat";
 
 const App: FunctionComponent<{}> = () => {
 
@@ -13,17 +16,25 @@ const App: FunctionComponent<{}> = () => {
     sessionStorage.setItem("token", token);
   }, []);
 
-  const [defaultValue] = useContext(ArtifactCountsContext);
-  const artifactCountsRequest = useState(defaultValue);
+  const [artifactContext] = useContext(ArtifactContext);
+  const artifactContextState = useState(artifactContext);
+
+  const [neatContext] = useContext(NeatContext);
+  const neatContextState = useState(neatContext);
 
   return (
 
     <ErrorBoundary>
-      <ArtifactCountsContext.Provider value={artifactCountsRequest}>
+      <ArtifactContext.Provider value={artifactContextState}>
         <Switch>
           <Route exact path="/" component={Home} />
         </Switch>
-      </ArtifactCountsContext.Provider>
+      </ArtifactContext.Provider>
+      <NeatContext.Provider value={neatContextState}>
+        <Switch>
+          <Route exact path="/neat" component={Neat} />
+        </Switch>
+      </NeatContext.Provider>
     </ErrorBoundary>
   );
 };

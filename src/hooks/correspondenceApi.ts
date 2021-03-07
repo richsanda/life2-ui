@@ -22,7 +22,7 @@ class CorrespondenceAPI {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'ttl_seconds': '3600'
             },
-        }) */
+        }) */ 
     return "";
   }
 
@@ -49,7 +49,7 @@ class CorrespondenceAPI {
     return response;
   };
 
-  private static request = async <T, B = void>(
+  public static request = async <T, B = void>(
     url: string,
     method = "get",
     body: B | undefined = undefined,
