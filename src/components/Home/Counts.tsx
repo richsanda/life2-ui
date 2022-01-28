@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { rangeOfMonths } from "../../utils/data.json";
 import ArtifactContext from "../../contexts/ArtifactContext";
-import MonthBox from "./MonthBox"
+import MonthBox from "./OldMonthBox"
 
 const Counts = () => {
 

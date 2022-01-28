@@ -1,13 +1,15 @@
+import { Email } from "./email";
+
 export interface ArtifactReadResponse {
-    sent: string,
-    from: string,
-    to: string,
-    from_email: string,
-    to_emails: string[],
-    subject: string,
-    trove: string,
+    when: string,
+    when2: string,
+    title: string,
+    image: string,
+    description: string,
     key: string,
-    body: string,
-    body_html: boolean
+    relative_keys: string[]
+    relative_key_index: number
+    trove: string
+    email ?: Email
 }
   

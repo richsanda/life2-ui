@@ -35,7 +35,7 @@ const Inputs = () => {
         if (true) {
           CorrespondenceApi.artifactCounts({...countsRequest, "from": from, "to": to})
             .then((response) => {
-                let [response2, maxBoxCount] = rangeOfYearMonthsWithCounts(1994, 2021, response)
+                let [response2, maxBoxCount] = rangeOfYearMonthsWithCounts(1990, 2021, response)
                 setArtifactsContext({
                     ...artifactsContext, 
                     "countsResponse" : response2,

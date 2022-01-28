@@ -20,6 +20,7 @@ export interface NeatFile {
 
 export interface NoteBox {
     key: string;
+    files: NeatFile[];
     notes: Note[];
 }
 
@@ -28,4 +29,10 @@ export interface Note {
     text: string;
     pointers: string[];
     file: NeatFile;
+    data?: any;
+}
+
+export interface Person {
+    name: string;
+    emails: string[];
 }

@@ -1,11 +1,11 @@
 {
     "artifactCounts" : {
-        "after" : "1994-08-01",
+        "after" : "1990-08-01",
         "before" : "2021-02-20",
         "owner" : "rich"
     },
     "artifactSearch" : {
-        "after" : "1994-08-01",
+        "after" : "1990-08-01",
         "before" : "2021-02-20",
         "owner" : "rich"
     }

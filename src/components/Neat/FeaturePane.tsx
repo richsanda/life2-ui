@@ -1,47 +1,71 @@
 import { useContext, useState } from "react";
 import NeatContext from "../../contexts/NeatContext";
+import NeatAPI from "../../hooks/neatApi";
 import { NeatFile } from "../../models";
-import CommentaryPane from "./CommentaryPane";
-import Commentary from "./CommentaryPane";
+import './imageHoverStyle.css';
 
 const FeaturePane = (props) => {
 
     const [neatContext, setNeatContext] = useContext(NeatContext);
-    const { file, noteBox, notes, note, fileIndex } = neatContext;
+    const { file, noteBox, notes, note, fileIndex, comment } = neatContext;
 
     const move = (count: number) => {
-
-        let nextIndex = fileIndex ? fileIndex + count : 0;
-
-        setNeatContext({
-            ...neatContext,
-            fileIndex: nextIndex,
-            note: notes[nextIndex],
-            file: noteBox ? notes[nextIndex].file : notes[nextIndex].file,
-            comment: notes[nextIndex].text
-        })
+        saveCurrent(() => { readNext(count); });
     }
 
-    function onKeyPress(event) {
-        var code = event.keyCode || event.which;
-        if(code === 13) { //13 is the enter keycode
-            move(1);
-        } else if (code === 24) {
-            move(-1);
-        } else if (code === 25) {
-            move(1);
-        }
+    const saveCurrent = (callback) => {
+
+        if (!note || !noteBox) return;
+
+        let currentFile = noteBox.files[fileIndex];
+
+        let updatedNote = {
+            ...note,
+            text: comment
+        };
+
+        NeatAPI.updateNote(currentFile.folder, currentFile.filename, updatedNote)
+            .then((response) => {
+                callback();
+            })
+    }
+
+    const readNext = (count: number) => {
+
+        let nextIndex = fileIndex + count;
+
+        let nextFile = noteBox ? noteBox.files[nextIndex] : notes ? notes[nextIndex].file : undefined;
+
+        if (!nextFile) return;
+
+        NeatAPI.readNote(nextFile.folder, nextFile.filename).then((response) => {
+
+            setNeatContext({
+                ...neatContext,
+                fileIndex: nextIndex,
+                note: response ? response : notes[nextIndex],
+                file: nextFile,
+                comment: response ? response.text : notes[nextIndex].text
+            })
+        });
     }
 
     return (
         <div className="featurepane">
-            <div className="prev button" onClick={() => move(-1)}>&nbsp;</div>
+                <div className="prev button" onClick={() => move(-1)}>&nbsp;</div>
+                :
+                <div className="prev">&nbsp;</div>
+          
             {file ?
                 <img className="center-fit" src={imgSrc(file)}></img>
                 :
                 <></>
             }
-            <div className="next button" onClick={() => move(1)}>&nbsp;</div>
+            {fileIndex < notes.length - 1 ?
+                <div className="next button" onClick={() => move(1)}>&nbsp;</div>
+                :
+                <div className="next">&nbsp;</div>
+            } 
         </div>
     )
 }

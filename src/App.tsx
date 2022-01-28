@@ -8,6 +8,7 @@ import NeatContext from "./contexts/NeatContext";
 import ErrorBoundary from "./ErrorBoundary";
 import CorrespondenceAPI from "./hooks/correspondenceApi";
 import Neat from "./pages/Neat";
+import Life2 from "./pages/Life2";
 
 const App: FunctionComponent<{}> = () => {
 
@@ -25,15 +26,15 @@ const App: FunctionComponent<{}> = () => {
   return (
 
     <ErrorBoundary>
-      <ArtifactContext.Provider value={artifactContextState}>
-        <Switch>
-          <Route exact path="/" component={Home} />
-        </Switch>
-      </ArtifactContext.Provider>
       <NeatContext.Provider value={neatContextState}>
-        <Switch>
-          <Route exact path="/neat" component={Neat} />
-        </Switch>
+
+        <ArtifactContext.Provider value={artifactContextState}>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/life2" component={Life2} />
+            <Route exact path="/neat" component={Neat} />
+          </Switch>
+        </ArtifactContext.Provider>
       </NeatContext.Provider>
     </ErrorBoundary>
   );

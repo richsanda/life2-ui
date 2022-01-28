@@ -18,7 +18,7 @@ function rangeOfYearMonthsWithCounts(start: number, end: number, results: Artifa
         let header: ArtifactCountsResponse = {
             header: true,
             year: y,
-            month: -1,
+            month: 1,
             count: 0
         };
         results.push(header);
@@ -49,7 +49,7 @@ function endOfMonth(year: number, month: number): string {
 }
 
 function prettyDate(datestr: string) {
-    return moment(datestr).format("MMM DD, YYYY").toLowerCase();
+    return datestr ? moment(datestr).format("MMM DD, YYYY").toLowerCase() : "";
 }
 
 function bodyify(text) {

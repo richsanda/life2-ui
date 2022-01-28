@@ -1,0 +1,55 @@
+
+    .col-md-4 {
+        padding: 1rem;
+        background-color: #dfe7f5;
+        border: 2px solid #fff;
+        color: #193057;
+        text-align: center;
+    }
+     
+    .col-md-5 {
+        padding: 1rem;
+        background-color: #dfe7f5;
+        border: 2px solid #fff;
+        color: #193057;
+        text-align: center;
+    }
+
+    .col-md-6 {
+        padding: 1rem;
+        background-color: #dfe7f5;
+        border: 2px solid #fff;
+        color: #193057;
+        text-align: center;
+    }
+     
+    .col-md-7 {
+        padding: 1rem;
+        background-color: #dfe7f5;
+        border: 2px solid #fff;
+        color: #193057;
+        text-align: center;
+    }
+
+    .col-md-8 {
+        padding: 1rem;
+        background-color: #dfe7f5;
+        border: 2px solid #fff;
+        color: #193057;
+        text-align: center;
+    }
+
+    .col-md-12 {
+        padding: 1rem;
+        background-color: #dfe7f5;
+        border: 2px solid #fff;
+        color: #193057;
+        text-align: center;
+        }    
+
+    .scrollable {
+        height: 90vh;
+        overflow: hidden;
+         overflow-y: scroll; 
+         text-align: center;
+    }

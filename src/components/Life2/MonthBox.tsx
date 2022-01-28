@@ -36,15 +36,14 @@ const MonthBox = (props) => {
             });
     };
 
-    let className = count != 0 && !header ? 'month-box' : 'plain-month-box';
-    let background = index == selected && 'rgba(155, 0, 0, 0.5)' || 'rgba(155,155,155,' + count / maxBoxCount * 1.25 + ')' || 'rgba(155,155,155,0)';
-    let border = index == selected && '1px solid red' || count > 0 && '1px solid gray' || '1px solid white'
+    let className = index == selected ? 'selected-month-box' : count && !header ? 'month-box' : 'plain-month-box';
     return (
         <div
             className={`${className}`}
-            style={{ background: `${background}`, border: `${border}` }}
+            style={{ opacity: !header ? count * 1.2  / maxBoxCount : 1 }}
             key={`${year}.${month}.${count}`}
             onClick={monthBoxClick}
+            title={`${count}`}
         >
             {header && year.toString().substr(2, 3) || ''} 
             {/* !monthBox.header && monthBox.count */}

@@ -30,6 +30,7 @@ div.clickable:hover {
     display: table;
     table-layout: fixed;
     margin: 10px;
+    font-size: 0.8em;
 }
 
 div.artifact-link {
@@ -51,11 +52,9 @@ div.artifact-link-col {
 
 .grid {
     display: grid;
-    grid-auto-flow: column;
-    grid-template-rows: repeat(13, 25px);
-    grid-auto-columns: 25px;
-    align: center;
-    margin: 10px;
+    grid-auto-flow: row;
+    grid-auto-rows: 16px;
+    grid-template-columns: repeat(13, 16px);
 }
 
 div.month-box:hover {
@@ -63,27 +62,31 @@ div.month-box:hover {
 }
 
 div.plain-month-box {
-    border: 1px solid white;
-    font-size: 0.8em;
+    border: 1px solid #dfe7f5;
+    background-color: #dfe7f5;
+    opacity: .5;
+    font-size: 0.6em;
     font-style: italic;
     text-align: center;
 }
 
 div.month-box {
-    border: 1px solid gray;
-    font-size: 0.8em;
+    border: 1px solid #193057;
+    background-color: #193057;
+    font-size: 0.6em;
     font-style: italic;
     text-align: center;
 }
 
-div.month-box-selected {
+div.selected-month-box {
     border: 1px solid red;
     background-color: rgba(255,155,155,0.45);
 }
 
 div.month-name {
-    font-size: 0.8em;
+    font-size: 0.6em;
     font-style: italic;
+    color: #193057;
 }
 
 #feature-background {
@@ -103,7 +106,7 @@ div.month-name {
     max-height: 80%;
     height: 100%;
     overflow-y: auto;
-    font-size: 1.1em;
+    font-size: 0.8em;
     color: black;
     margin: 50px;
     padding: 10px;

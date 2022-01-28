@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import NeatContext from "../contexts/NeatContext";
 import { NoteBox, Note, NeatFile } from "../models";
 
 function reorder(array: any[], from: number, to: number): any[] {
@@ -21,13 +23,15 @@ function initNoteBox(folder: string, files: NeatFile[]): NoteBox {
     
     let noteBox: NoteBox = {
         key: folder,
+        files: files,
         notes: files.map((file) => {
             return(
                 {
                     key: file.filename,
                     text: "",
                     pointers: [file.filename],
-                    file: file
+                    file: file,
+                    data: {}
                 }
             )
         })

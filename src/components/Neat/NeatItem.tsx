@@ -4,6 +4,7 @@ import NeatContext from "../../contexts/NeatContext";
 import { NeatFile } from "../../models";
 import Draggable from "react-draggable";
 import { reorder } from "../../utils/NeatUtils";
+import NeatAPI from "../../hooks/neatApi";
 
 const NeatItem = (props) => {
 
@@ -35,6 +36,33 @@ const NeatItem = (props) => {
     }
   }
 
+  function onClick() {
+   
+      let nextFile = note.file;
+
+      setNeatContext({
+        ...neatContext,
+        file: note.file,
+        fileIndex: index,
+        note: note,
+        comment: note.text
+      });
+
+      NeatAPI.readNote(nextFile.folder, nextFile.filename).then((response) => {
+
+        setNeatContext({
+            ...neatContext,
+            folder: folder,
+            noteBox: noteBox,
+            fileIndex: index,
+            note: response ? response : note,
+            file: nextFile,
+            comment: response ? response.text : note.text
+        })
+      });
+
+      setSelectedIndex(2);
+    }
 
   if (note) {
 
@@ -45,16 +73,7 @@ const NeatItem = (props) => {
         key={`${note.file?.filename}`}
         id={`${note.file?.filename}`}
         className={`neat-item ${isCurrent ? 'selected' : ''}`}
-        onClick={() => {
-          setNeatContext({
-            ...neatContext,
-            file: note.file,
-            fileIndex: index,
-            note: note,
-            comment: note.text
-          });
-          setSelectedIndex(2);
-        }}
+        onClick={onClick}
       >
         {displayName(note.file)} {note.text}
       </div>
