@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import NeatContext from "../../contexts/NeatContext";
-import NeatAPI from "../../hooks/neatApi";
+import ArtifactAPI from "../../hooks/artifactApi";
 import NeatTextbox from "./NeatTextBox";
 
 const CommentaryPane = () => {
@@ -46,7 +46,7 @@ const CommentaryPane = () => {
             text: comment
         }
 
-        NeatAPI.updateNote(file.folder, file.filename, updatedNote)
+        ArtifactAPI.updateNote(file.folder, file.filename, updatedNote)
     }
 
     return (

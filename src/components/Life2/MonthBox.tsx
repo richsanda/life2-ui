@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ArtifactCountsResponse, ArtifactSearchRequest } from "../../models";
-import CorrespondenceApi from "../../hooks/correspondenceApi";
+import ArtifactAPI from "../../hooks/artifactApi";
 import searchRequest from "../../utils/requestTemplates.json";
 import ArtifactContext from "../../contexts/ArtifactContext";
 import { startOfMonth, endOfMonth } from "../../utils/Utils";
@@ -24,7 +24,7 @@ const MonthBox = (props) => {
 
     const monthBoxClick = async () => {
 
-        CorrespondenceApi.artifactSearch(request)
+        ArtifactAPI.artifactSearch(request)
             .then((response) => {
                 setArtifactsContext({
                     ...artifactsContext,

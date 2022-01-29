@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import Results from "../components/Neat/Results";
 import NeatContext from "../contexts/NeatContext";
-import NeatAPI from "../hooks/neatApi";
+import ArtifactAPI from "../hooks/artifactApi";
 
 const Neat = () => {
 
@@ -18,7 +18,7 @@ const Neat = () => {
 
         updateToken();
 
-        NeatAPI.listNeatFolders()
+        ArtifactAPI.listNeatFolders()
             .then((response) => {
                 setNeatContext({ ...neatContext, "folders": response })
             }).catch(() => {

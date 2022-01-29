@@ -4,7 +4,7 @@ import {
     ArtifactCountsResponse, 
     ArtifactSearchRequest, 
     ArtifactSearchResponse,
-    ArtifactReadResponse
+    Artifact
 } from "../models";
 import { artifactCounts, artifactSearch } from "../utils/requestTemplates.json";
 
@@ -27,7 +27,7 @@ const artifactContextState: ArtifactContextState = {
     countsResponse: ArtifactCountsResponse[];
     searchRequest: ArtifactSearchRequest;
     searchResponse: ArtifactSearchResponse[];
-    readResponse?: ArtifactReadResponse;
+    artifact?: Artifact;
     maxBoxCount: number;
     monthSelected: number;
     from: string[];

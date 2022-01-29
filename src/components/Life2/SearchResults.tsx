@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ArtifactContext from "../../contexts/ArtifactContext";
-import CorrespondenceApi from "../../hooks/correspondenceApi";
+import ArifactAPI from "../../hooks/artifactApi";
 import SearchResultRow from "./SearchResultRow";
 import '../../styles/life2.css';
 

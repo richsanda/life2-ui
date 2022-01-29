@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import NeatContext from "../../contexts/NeatContext";
-import NeatAPI from "../../hooks/neatApi";
+import ArtifactAPI from "../../hooks/artifactApi";
 import { NoteBox } from "../../models";
 import { initNoteBox } from "../../utils/NeatUtils";
 
@@ -29,7 +29,7 @@ const NeatFolder = (props) => {
 
     const loadNoteBox = () => {
         if (!noteBoxes[folder]) {
-            NeatAPI.readNeatFolder(folder)
+            ArtifactAPI.readNeatFolder(folder)
                 .then((response) => {
                     noteBoxes[folder] = initNoteBox(folder, response);
                     syncNoteBoxContext(folder, noteBoxes[folder]);

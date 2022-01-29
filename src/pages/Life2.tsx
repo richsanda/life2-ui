@@ -1,7 +1,5 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-import Results from "../components/Home/Results";
-import Feature from "../components/Home/Feature";
 import '../styles/life2.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CountGrid from "../components/Life2/CountGrid";

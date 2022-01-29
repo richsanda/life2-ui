@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { prettyDate } from "../../utils/Utils";
-import CorrespondenceApi from "../../hooks/correspondenceApi";
+import ArtifactAPI from "../../hooks/artifactApi";
 import ArtifactContext from "../../contexts/ArtifactContext";
 import { Button, Carousel, Modal } from "react-bootstrap";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
@@ -9,25 +9,17 @@ import '../../styles/magnifier.less';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NeatTextbox from "../Neat/NeatTextBox";
 import Magnifier from "react-magnifier";
-// import {
-//     Magnifier,
-//     GlassMagnifier,
-//     SideBySideMagnifier,
-//     PictureInPictureMagnifier,
-//     MOUSE_ACTIVATION,
-//     TOUCH_ACTIVATION
-// } from "react-image-magnifiers";
 
 const ArtifactModal = (props) => {
 
-    const { 
-        show, 
-        artifact, 
-        commentary, 
+    const {
+        show,
+        artifact,
+        commentary,
         relativeKeys,
-        relativeKeyIndex, 
-        handleSelect, 
-        handleChange, 
+        relativeKeyIndex,
+        handleSelect,
+        handleChange,
         handleClose } = props;
 
     //https://dev.to/anxiny/create-an-image-magnifier-with-react-3fd7
@@ -46,26 +38,23 @@ const ArtifactModal = (props) => {
                 <MDBContainer>
                     <MDBRow>
                         <MDBCol md="8">
-                        <Carousel 
-                        activeIndex={relativeKeyIndex} 
-                        interval={null} 
-                        wrap={false}
-                        onSelect={handleSelect}>
-                            {relativeKeys.map((key, index) => {
-                return (
-                           <Carousel.Item>
-                            <Magnifier 
-                            mgShape="circle"
-                             mgWidth={200} 
-                             mgHeight={200} 
-                             zoomFactor={1.1}
-                             src={artifact.image} />
-                            {/* <Magnifier
-                                imageSrc={artifact.image}
-                                dragToMove={false}
-                            /> */}
-                            </Carousel.Item>
-                )})}
+                            <Carousel
+                                activeIndex={relativeKeyIndex}
+                                interval={null}
+                                wrap={false}
+                                onSelect={handleSelect}>
+                                {relativeKeys.map((key, index) => {
+                                    return (
+                                        <Carousel.Item>
+                                            <Magnifier
+                                                mgShape="circle"
+                                                mgWidth={200}
+                                                mgHeight={200}
+                                                zoomFactor={1.1}
+                                                src={artifact.image} />
+                                        </Carousel.Item>
+                                    )
+                                })}
                             </Carousel>
                         </MDBCol>
                         <MDBCol md="4">
@@ -74,7 +63,7 @@ const ArtifactModal = (props) => {
                     </MDBRow>
                 </MDBContainer>
             </Modal.Body>
-        </Modal>
+        </Modal >
     )
 }
 
@@ -91,25 +80,22 @@ const ResultRow = (props) => {
 
     const [artifactData, setArtfactData] = useState({});
     const [commentary, setCommetary] = useState('');
-    const [trove, setTrove] = useState('');
-    const empty : string[] = [];
-    const [relativeKeys, setRelativeKeys] = useState(empty);
+    const [relativeKeys, setRelativeKeys] = useState<string[]>([]);
     const [relativeKeyIndex, setRelativeKeyIndex] = useState(0);
 
     const resultRowClick = async () => {
 
         const key = artifact.key.split("/");
 
-        CorrespondenceApi.artifactRead(key[0], key[1])
+        ArtifactAPI.artifactRead(key[0], key[1])
             .then((response) => {
                 setArtifactsContext({
                     ...artifactsContext,
-                    "readResponse": response
+                    "artifact": response
                 });
                 console.log("index: " + relativeKeyIndex);
                 setArtfactData(response);
                 setCommetary(response.description);
-                setTrove(response.trove);
                 setRelativeKeys(response.relative_keys);
                 setRelativeKeyIndex(response.relative_key_index);
 
@@ -124,11 +110,11 @@ const ResultRow = (props) => {
 
         const key = relativeKeys[index].split("/");
 
-        CorrespondenceApi.artifactRead(key[0], key[1])
+        ArtifactAPI.artifactRead(key[0], key[1])
             .then((response) => {
                 setArtifactsContext({
                     ...artifactsContext,
-                    "readResponse": response
+                    "artifact": response
                 });
                 setArtfactData(response);
                 setCommetary(response.description);

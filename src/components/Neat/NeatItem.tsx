@@ -4,7 +4,7 @@ import NeatContext from "../../contexts/NeatContext";
 import { NeatFile } from "../../models";
 import Draggable from "react-draggable";
 import { reorder } from "../../utils/NeatUtils";
-import NeatAPI from "../../hooks/neatApi";
+import ArtifactAPI from "../../hooks/artifactApi";
 
 const NeatItem = (props) => {
 
@@ -48,7 +48,7 @@ const NeatItem = (props) => {
         comment: note.text
       });
 
-      NeatAPI.readNote(nextFile.folder, nextFile.filename).then((response) => {
+      ArtifactAPI.readNote(nextFile.folder, nextFile.filename).then((response) => {
 
         setNeatContext({
             ...neatContext,

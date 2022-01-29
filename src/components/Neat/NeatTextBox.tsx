@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import NeatAPI from "../../hooks/neatApi";
+import ArtifactAPI from "../../hooks/artifactApi";
 import { Person } from "../../models";
 import CommentaryBox from "./CommentaryBox";
 
@@ -11,7 +11,7 @@ const NeatTextbox = ({value, onChange}: {value: string, onChange: any}) => {
 
     const handleSearch = () => {
         setIsLoading(true);
-        NeatAPI.persons().then((response) => {
+        ArtifactAPI.persons().then((response) => {
             setOptions(response);
             setIsLoading(false);
         })

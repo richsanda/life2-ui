@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import CorrespondenceApi from "../../hooks/correspondenceApi";
+import ArtifactAPI from "../../hooks/artifactApi";
 import ArtifactContext from "../../contexts/ArtifactContext";
 import { rangeOfYearMonthsWithCounts } from "../../utils/Utils";
 
@@ -33,7 +33,7 @@ const SearchPanel = () => {
         updateToken();
 
         if (true) {
-            CorrespondenceApi.artifactCounts({ ...countsRequest, "from": from, "to": to })
+            ArtifactAPI.artifactCounts({ ...countsRequest, "from": from, "to": to })
                 .then((response) => {
                     let [results, maxBoxCount] = rangeOfYearMonthsWithCounts(1990, 2021, response)
                     setArtifactsContext({
