@@ -8,16 +8,6 @@ export interface NeatFile {
     type: string;
 }
 
-// {
-//     "folder" : "folder-rich-is-awesome",
-//     "filename" : "Document- Page 1_10",
-//     "extension" : "jpg",
-//     "index" : 10,
-//     "page" : 1,
-//     "title" : " ",
-//     "type" : "Document"
-//   }
-
 export interface NoteBox {
     key: string;
     files: NeatFile[];
@@ -35,4 +25,9 @@ export interface Note {
 export interface Person {
     name: string;
     emails: string[];
+}
+
+
+export interface Trove {
+    name: string;
 }

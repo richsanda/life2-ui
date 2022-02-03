@@ -10,7 +10,9 @@ const ResultRow = (props) => {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+    }
     const handleShow = () => setShow(true);
 
     const { artifact, index } = props;
@@ -23,6 +25,7 @@ const ResultRow = (props) => {
     const resultRowClick = async () => {
 
         retrieveArtifact(
+            artifact.trove,
             artifact.key, 
             (response) => {
             setArtfactData(response);
@@ -35,8 +38,11 @@ const ResultRow = (props) => {
 
     const handleSelect = (index) => {
 
+        const parts = relativeKeys[index].split("/");
+
         retrieveArtifact(
-            relativeKeys[index], 
+            parts[0],
+            parts[1], 
             (response) => {
             setArtfactData(response);
             setCommetary(response.description);
@@ -44,14 +50,12 @@ const ResultRow = (props) => {
         });
     };
 
-    const retrieveArtifact = (key, callback) => {
+    const retrieveArtifact = (trove, key, callback) => {
 
-        const parts = key.split("/");
-
-        ArtifactAPI.artifactRead(parts[0], parts[1])
+        ArtifactAPI.artifactRead(trove, key)
             .then(callback)
-            .catch(() => {
-                alert("error retrieving artifact with id: " + key);
+            .catch((e) => {
+                alert("error retrieving artifact with id: " + key + " " + e);
             });
     }
 
@@ -60,7 +64,7 @@ const ResultRow = (props) => {
             <div className="artifact-link" key={`artifact${index}`}>
                 <div onClick={resultRowClick}>
                     <div className="artifact-link-col">
-                        {`${index + 1}. ${prettyDate(artifact.when)} -- ${artifact.title} -- ${artifact.trove}`}
+                        {`${index + 1}. ${prettyDate(artifact.when)} (${artifact.trove}): ${artifact.title} `}
                     </div>
                 </div>
             </div>

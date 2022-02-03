@@ -1,6 +1,7 @@
 import { Email } from "./email";
 
 export interface Artifact {
+    types: string[],
     when: string,
     when2: string,
     title: string,

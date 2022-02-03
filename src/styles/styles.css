@@ -28,9 +28,10 @@ div.clickable:hover {
 
 #results {
     display: table;
+    text-align: left;
     table-layout: fixed;
     margin: 10px;
-    font-size: 0.8em;
+    font-size: 0.85em;
 }
 
 div.artifact-link {
@@ -48,6 +49,7 @@ div.artifact-link-col {
     padding: 2px;
     display: table-cell;
     padding-right: 25px;
+    font-size: 0.85em;
 }
 
 .grid {
@@ -55,6 +57,7 @@ div.artifact-link-col {
     grid-auto-flow: row;
     grid-auto-rows: 16px;
     grid-template-columns: repeat(13, 16px);
+    background-color: #dfe7f5;
 }
 
 div.month-box:hover {
@@ -62,9 +65,8 @@ div.month-box:hover {
 }
 
 div.plain-month-box {
-    border: 1px solid #dfe7f5;
     background-color: #dfe7f5;
-    opacity: .5;
+    opacity: 1;
     font-size: 0.6em;
     font-style: italic;
     text-align: center;
@@ -106,7 +108,7 @@ div.month-name {
     max-height: 80%;
     height: 100%;
     overflow-y: auto;
-    font-size: 0.8em;
+    font-size: 0.85em;
     color: black;
     margin: 50px;
     padding: 10px;

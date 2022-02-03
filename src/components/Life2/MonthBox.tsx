@@ -40,7 +40,7 @@ const MonthBox = (props) => {
     return (
         <div
             className={`${className}`}
-            style={{ opacity: !header ? count * 1.2  / maxBoxCount : 1 }}
+            style={{ opacity: !header && count != 0 ? 0.1 + count * 1.2  / maxBoxCount : 1 }}
             key={`${year}.${month}.${count}`}
             onClick={monthBoxClick}
             title={`${count}`}

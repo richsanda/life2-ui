@@ -1,7 +1,7 @@
 import {
   Artifact, NeatFile, Note, Person,
   ArtifactCountsRequest, ArtifactCountsResponse,
-  ArtifactSearchRequest, ArtifactSearchResponse
+  ArtifactSearchRequest, ArtifactSearchResponse, Trove
 } from "../models";
 
 class ArtifactAPI {
@@ -60,6 +60,11 @@ class ArtifactAPI {
 
   public static persons = async () => {
     let response = await ArtifactAPI.request<Person[]>(`persons`);
+    return response;
+  };
+
+  public static troves = async () => {
+    let response = await ArtifactAPI.request<Trove[]>(`troves`);
     return response;
   };
 

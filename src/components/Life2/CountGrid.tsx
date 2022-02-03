@@ -11,10 +11,10 @@ const CountGrid = () => {
 
     return (
         <div className="grid" id="counts">
-            <div>&nbsp;</div>
+            <div className="plain-month-box">&nbsp;</div>
             {rangeOfMonths.map((m, index) => {
                 return (
-                    <div key={index} className="month-name" data-ng-repeat="m in rangeOfMonths">{m}</div>
+                    <div key={index} className="plain-month-box" data-ng-repeat="m in rangeOfMonths">{m}</div>
                 );
             })}
             {countsResponse.map((monthBox, index) => {

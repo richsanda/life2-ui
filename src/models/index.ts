@@ -4,4 +4,4 @@ export * from "./artifactSearchRequest";
 export * from "./artifactSearchResponse";
 export * from "./artifact";
 export * from "./email";
-export * from "./neat";
+export * from "./auxiliary";
