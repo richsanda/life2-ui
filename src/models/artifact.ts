@@ -12,5 +12,6 @@ export interface Artifact {
     relative_key_index: number
     trove: string
     email ?: Email
+    data ?: any
 }
   

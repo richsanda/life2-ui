@@ -1,5 +1,5 @@
-import React from "react";
 import moment from "moment";
+import React from "react";
 import { ArtifactCountsResponse } from "../models";
 
 function rangeOfYearMonthsWithCounts(start: number, end: number, results: ArtifactCountsResponse[]): [ArtifactCountsResponse[], number] {
@@ -64,4 +64,10 @@ function preify(text) {
 
 const renderHTML = (rawHTML: string) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
 
-export { rangeOfYearMonthsWithCounts, startOfMonth, endOfMonth, prettyDate, bodyify, preify }
+const updateToken = () => {
+    const username = "rich";
+    const password = "yahdude4747";
+    sessionStorage.setItem("token", Buffer.from(`${username}:${password}`).toString('base64'));
+}
+
+export { rangeOfYearMonthsWithCounts, startOfMonth, endOfMonth, prettyDate, bodyify, preify, updateToken }

@@ -4,15 +4,13 @@ import ArtifactAPI from "../../hooks/artifactApi";
 import '../../styles/styles.css';
 import '../../styles/magnifier.less';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ArtifactModal from "./ArtifactModal";
+import ArtifactModal from "../modal/ArtifactModal";
 
 const ResultRow = (props) => {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => {
-        setShow(false);
-    }
+    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const { artifact, index } = props;

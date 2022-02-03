@@ -3,7 +3,6 @@ import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import NeatContext from "../../contexts/NeatContext";
 import ArtifactAPI from "../../hooks/artifactApi";
-import NeatTextbox from "./NeatTextBox";
 
 const CommentaryPane = () => {
 
@@ -54,7 +53,7 @@ const CommentaryPane = () => {
         <div className="commentarypane">
             <div className="toppane button" onClick={onSave}>&nbsp;</div>
             <div>
-                <NeatTextbox value={comment} onChange={onChange} />
+                {/* <NeatTextbox value={comment} onChange={onChange} /> */}
                 <Button
                     variant="outline-primary"
                     onClick={() => setComment(`${comment}\n${sep}\n${contactTemplate}`)}>contact</Button>{' '}

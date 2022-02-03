@@ -5,8 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CountGrid from "../components/Life2/CountGrid";
 import SearchPanel from "../components/Life2/SearchPanel";
 import SearchResults from "../components/Life2/SearchResults";
+import { updateToken } from "../utils/Utils";
 
 const Life2 = () => {
+
+    updateToken();
 
     return (
         <MDBContainer>
