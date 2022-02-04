@@ -4,6 +4,7 @@ export interface ArtifactCountsRequest {
     before: string;
     from?: string[];
     to?: string[];
+    text?: string; 
 }
 
     // params.owner = "rich";

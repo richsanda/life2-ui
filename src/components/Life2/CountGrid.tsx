@@ -4,7 +4,9 @@ import ArtifactContext from "../../contexts/ArtifactContext";
 import MonthBox from "./MonthBox"
 import '../../styles/styles.css'
 
-const CountGrid = () => {
+const CountGrid = (props) => {
+
+    const { searchText } = props;
 
     const [artifactsContext, setArtifactsContext] = useContext(ArtifactContext);
     const { searchRequest, countsResponse, maxBoxCount, monthSelected } = artifactsContext;
@@ -20,6 +22,7 @@ const CountGrid = () => {
             {countsResponse.map((monthBox, index) => {
                 return (
                     <MonthBox 
+                    searchText={searchText}
                     key={`${monthBox.year}.${monthBox.month}`} 
                     monthBox={monthBox} 
                     selected={false} 

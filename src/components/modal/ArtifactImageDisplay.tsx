@@ -6,10 +6,10 @@ const ArtifactImageDisplay = (props: { artifact: Artifact }) => {
     return (
         <div style={{ maxHeight: "500px", overflowY: "scroll" }}>
             <Magnifier
-                mgShape="square"
-                mgWidth={1000}
-                mgHeight={1000}
-                zoomFactor={0.15}
+                mgShape="circle"
+                mgWidth={400}
+                mgHeight={400}
+                zoomFactor={0.4}
                 src={props.artifact.image} /> :
         </div>
     )

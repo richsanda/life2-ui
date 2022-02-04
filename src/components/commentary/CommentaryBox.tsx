@@ -51,6 +51,25 @@ function CommentaryBox({ value, onChange, onAdd }) {
         />
 
         <Mention
+          markup="![__display__](trove:__id__)"
+          trigger="!"
+          data={troveOptions.map((p) => { return { id: p.name, display: p.name } })}
+          renderSuggestion={(
+            suggestion,
+            search,
+            highlightedDisplay,
+            index,
+            focused
+          ) => (
+            <div className={`user ${focused ? 'focused' : ''}`}>
+              {highlightedDisplay}
+            </div>
+          )}
+          onAdd={onAdd}
+          style={defaultMentionStyle}
+        />
+
+        <Mention
           markup="#[__display__](tag:__id__)"
           trigger="#"
           data={[]}

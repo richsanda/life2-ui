@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import '../styles/life2.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -6,31 +6,24 @@ import CountGrid from "../components/Life2/CountGrid";
 import SearchPanel from "../components/Life2/SearchPanel";
 import SearchResults from "../components/Life2/SearchResults";
 import { updateToken } from "../utils/Utils";
+import SearchPane from "../components/Life2/SearchPane"
 
 const Life2 = () => {
 
-    updateToken();
+    useEffect(() => {
+        updateToken();
+    }, [])
 
     return (
         <MDBContainer>
             <MDBRow>
                 <MDBCol md="6">
-                    <MDBRow>
-                        <MDBCol md="12">
-                            <SearchPanel/>
-                        </MDBCol>
-                    </MDBRow>
-                    <MDBRow>
-                        <MDBCol md="6">
-                            <CountGrid/>
-                        </MDBCol>
-                        <MDBCol md="6">timeline</MDBCol>
-                    </MDBRow>
+                    <SearchPane/>
                 </MDBCol>
                 <MDBCol md="6">
                     <MDBRow>
                         <MDBCol md="12" className="scrollable">
-                            <SearchResults/>
+                            <SearchResults />
                         </MDBCol>
                     </MDBRow>
                 </MDBCol>

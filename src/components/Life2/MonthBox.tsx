@@ -10,7 +10,7 @@ const MonthBox = (props) => {
     const [artifactsContext, setArtifactsContext] = useContext(ArtifactContext);
     const { searchRequest, from, to } = artifactsContext;
 
-    const { monthBox, selected, index, maxBoxCount } = props;
+    const { searchText, monthBox, selected, index, maxBoxCount } = props;
     const { count, year, month, header} = monthBox;
     const after = startOfMonth(year, month);
     const before = endOfMonth(year, month)
@@ -19,7 +19,8 @@ const MonthBox = (props) => {
         "after" : after,
         "before" : before,
         "from" : from,
-        "to" : to
+        "to" : to,
+        "text" : searchText
     }
 
     const monthBoxClick = async () => {
