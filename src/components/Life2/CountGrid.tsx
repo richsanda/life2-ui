@@ -16,14 +16,14 @@ const CountGrid = (props) => {
             <div className="plain-month-box">&nbsp;</div>
             {rangeOfMonths.map((m, index) => {
                 return (
-                    <div key={index} className="plain-month-box" data-ng-repeat="m in rangeOfMonths">{m}</div>
+                    <div key={`${index}`} className="plain-month-box" data-ng-repeat="m in rangeOfMonths">{m}</div>
                 );
             })}
             {countsResponse.map((monthBox, index) => {
                 return (
                     <MonthBox 
                     searchText={searchText}
-                    key={`${monthBox.year}.${monthBox.month}`} 
+                    key={`${monthBox.year}.${monthBox.month}.${index}`} 
                     monthBox={monthBox} 
                     selected={false} 
                     maxBoxCount={maxBoxCount} />

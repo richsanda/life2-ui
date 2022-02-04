@@ -22,7 +22,7 @@ const Results = () => {
         </div> */}
         {searchResponse.map((artifact, index) => {
                 return (
-                  <SearchResultRow artifact={artifact} index={index}/>
+                  <SearchResultRow artifact={artifact} key={index} index={index}/>
                 )
             })}
     </div>

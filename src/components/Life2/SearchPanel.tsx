@@ -6,6 +6,10 @@ const SearchPanel = (props) => {
 
     const { searchText, setSearchText, counts } = props;
 
+    const onChange = (e, val) => {
+        setSearchText(val);
+    }
+
     return (
         <MDBContainer>
             <MDBRow>
@@ -14,9 +18,9 @@ const SearchPanel = (props) => {
                 </MDBCol>
                 <MDBCol md="8">
                     <CommentaryBox 
+                    onChange={onChange}
+                    onAdd={(...args) => console.log(searchText)}
                     value={searchText}
-                    onChange={(e, val) => setSearchText(val)}
-                    onAdd={() => {}}
                     />
                 </MDBCol>
             </MDBRow>

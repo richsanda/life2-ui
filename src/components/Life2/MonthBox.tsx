@@ -23,6 +23,8 @@ const MonthBox = (props) => {
         "text" : searchText
     }
 
+    const opacity = !header && count != 0 ? 0.1 + count * 1.2  / maxBoxCount : 1;
+
     const monthBoxClick = async () => {
 
         ArtifactAPI.artifactSearch(request)
@@ -41,13 +43,12 @@ const MonthBox = (props) => {
     return (
         <div
             className={`${className}`}
-            style={{ opacity: !header && count != 0 ? 0.1 + count * 1.2  / maxBoxCount : 1 }}
+            style={{ opacity: opacity? opacity : 1}}
             key={`${year}.${month}.${count}`}
             onClick={monthBoxClick}
             title={`${count}`}
         >
             {header && year.toString().substr(2, 3) || ''} 
-            {/* !monthBox.header && monthBox.count */}
         </div>
     )
 

@@ -16,8 +16,6 @@ const SearchPane = () => {
 
     const counts = async () => {
 
-        updateToken();
-
         ArtifactAPI.artifactCounts({ ...countsRequest, "from": from, "to": to, "text" : searchText })
             .then((response) => {
                 let [results, maxBoxCount] = rangeOfYearMonthsWithCounts(1990, 2021, response)
