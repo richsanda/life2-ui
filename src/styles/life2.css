@@ -51,10 +51,3 @@
         height: 90vh;
          overflow-y: scroll;
     }
-
-    .indent {
-        text-align: left;
-        text-indent: -40px;
-        margin: 40px;
-        padding: 10px;
-    }
