@@ -24,7 +24,7 @@ const ArtifactModal = (props) => {
         <Modal size="lg" show={show} onHide={handleClose}>
             <Modal.Header>
                 <Modal.Title>
-                    {prettyDate(artifact.when)} -- {artifact.title}
+                    {prettyDate(artifact.when)} &#8212; {artifact.title}
                 </Modal.Title>
                 <Button variant="primary" onClick={handleClose}>
                     Save Changes

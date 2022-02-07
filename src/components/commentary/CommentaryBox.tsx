@@ -7,7 +7,7 @@ import defaultMentionStyle from '../Neat/defaultMentionStyle'
 import { Person, Trove } from '../../models';
 import ArtifactAPI from '../../hooks/artifactApi';
 
-function CommentaryBox({ value, onChange, onAdd }) {
+function CommentaryBox({ value, onChange, onAdd, onKeyPress = (e) => {} }) {
 
   const [personOptions, setPersonOptions] = useState<Person[]>([]);
   const [troveOptions, setTroveOptions] = useState<Trove[]>([]);
@@ -27,6 +27,7 @@ function CommentaryBox({ value, onChange, onAdd }) {
       <MentionsInput
         value={value}
         onChange={onChange}
+        onKeyPress={onKeyPress}
         style={defaultStyle}
         placeholder={"'@' for people; '$' for fields; '$$' for type; '#' for topics"}
         a11ySuggestionsListLabel={"Suggested mentions"}

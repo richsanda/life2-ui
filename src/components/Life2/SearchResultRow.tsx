@@ -63,7 +63,7 @@ const ResultRow = (props) => {
                 <div onClick={resultRowClick}>
                     <div className="artifact-link-col">
                         {`${index + 1}. `}
-                        {`${prettyDate(artifact.when)} (${artifact.trove}): ${artifact.title} `}
+                        {`${prettyDate(artifact.when)} — ${artifact.trove} — ${artifact.title} `}
                     </div>
                 </div>
             </div>

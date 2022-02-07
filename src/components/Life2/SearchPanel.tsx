@@ -6,6 +6,12 @@ const SearchPanel = (props) => {
 
     const { searchText, setSearchText, counts } = props;
 
+    const onKeyPress = (event) => {
+        if(event.key === 'Enter'){
+          counts();
+        }
+      }
+
     const onChange = (e, val) => {
         setSearchText(val);
     }
@@ -18,6 +24,7 @@ const SearchPanel = (props) => {
                 </MDBCol>
                 <MDBCol md="8">
                     <CommentaryBox 
+                    onKeyPress={onKeyPress}
                     onChange={onChange}
                     onAdd={(...args) => console.log(searchText)}
                     value={searchText}

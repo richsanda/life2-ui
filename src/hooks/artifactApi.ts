@@ -8,7 +8,7 @@ class ArtifactAPI {
 
   public static artifactCounts = async (body: ArtifactCountsRequest) => {
     let response = await ArtifactAPI.request<ArtifactCountsResponse[], ArtifactCountsRequest>(
-      "artifact/counts",
+      "artifacts/counts",
       "post",
       body
     );
