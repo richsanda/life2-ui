@@ -11,7 +11,7 @@ export interface Artifact {
     relative_keys: string[]
     relative_key_index: number
     trove: string
-    email ?: Email
+    notes: string[]
     data ?: any
 }
   

@@ -17,7 +17,6 @@ export interface NoteBox {
 export interface Note {
     key: string;
     text: string;
-    pointers: string[];
     file: NeatFile;
     data?: any;
 }
