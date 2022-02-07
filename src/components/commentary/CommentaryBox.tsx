@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useDebugValue, useEffect, useState } from 'react'
 
 import { Mention, MentionsInput } from 'react-mentions'
 
@@ -7,19 +7,18 @@ import defaultMentionStyle from '../Neat/defaultMentionStyle'
 import { Person, Trove } from '../../models';
 import ArtifactAPI from '../../hooks/artifactApi';
 
-function CommentaryBox({ value, onChange, onAdd, onKeyPress = (e) => {} }) {
+interface CommentaryBoxProps {
+    value, 
+    onChange, 
+    onAdd, 
+    personOptions ?: Person[],
+    troveOptions ?: Trove[],
+    onKeyPress ?: any
+}
 
-  const [personOptions, setPersonOptions] = useState<Person[]>([]);
-  const [troveOptions, setTroveOptions] = useState<Trove[]>([]);
+function CommentaryBox(props : CommentaryBoxProps) {
 
-  useEffect(() => {
-    ArtifactAPI.persons().then((response) => {
-      setPersonOptions(response);
-    })
-    ArtifactAPI.troves().then((response) => {
-      setTroveOptions(response);
-    })
-  }, [])
+  const { value, onChange, onAdd, personOptions = [], troveOptions = [], onKeyPress } = props;
 
   return (
     <div>

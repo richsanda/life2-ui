@@ -7,7 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ArtifactImageFeature from "./ArtifactImageFeature";
 import EmailFeature from "./EmailFeature";
 import CommentaryBox from "../commentary/CommentaryBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Person, Trove } from "../../models";
+import ArtifactAPI from "../../hooks/artifactApi";
 
 function CustomToggle({ children, eventKey, handleEventKey }) {
     const decoratedOnClick = useAccordionButton(eventKey, () => {
@@ -27,7 +29,7 @@ function CustomToggle({ children, eventKey, handleEventKey }) {
 
 const ArtifactNote = (props) => {
 
-    const { content, index, removeNote, toggleNote } = props;
+    const { content, index, removeNote, toggleNote, personOptions } = props;
 
     return (<Card>
         <Card.Header style={{ fontSize: ".75em", cursor: "pointer", padding: "2px" }}>
@@ -37,6 +39,7 @@ const ArtifactNote = (props) => {
         <Accordion.Collapse eventKey={"" + index}>
             <Card.Body style={{ padding: "0px", fontSize: ".75em" }}>
                 <CommentaryBox
+                    personOptions={personOptions}
                     value={content}
                     onChange={() => { }}
                     onAdd={() => { }}
@@ -62,6 +65,18 @@ const CreateNoteDropdown = (props) => {
 }
 
 const ArtifactModal = (props) => {
+
+    const [personOptions, setPersonOptions] = useState<Person[]>([]);
+    const [troveOptions, setTroveOptions] = useState<Trove[]>([]);
+  
+    useEffect(() => {
+      ArtifactAPI.persons().then((response) => {
+        setPersonOptions(response);
+      })
+      ArtifactAPI.troves().then((response) => {
+        setTroveOptions(response);
+      })
+    }, [])
 
     const [notes, setNotes] = useState<string[]>([]);
     const [activeKey, setActiveKey] = useState<number>(0);
@@ -135,12 +150,11 @@ const ArtifactModal = (props) => {
                                 <CommentaryBox
                                     value={commentary}
                                     onChange={handleChange}
+                                    personOptions={personOptions}
                                     onAdd={() => { }}
                                 />
                             </MDBRow>
-                            <MDBRow>
-                                <CreateNoteDropdown addNote={addNote} />
-                            </MDBRow>
+                           
                             <MDBRow>
                                 <Accordion activeKey={"" + activeKey} defaultActiveKey={null}>
 
@@ -151,9 +165,13 @@ const ArtifactModal = (props) => {
                                             index={i}
                                             toggleNote={toggleNote}
                                             removeNote={removeNote}
+                                            personOptions={personOptions}
                                         />);
                                     })}
                                 </Accordion>
+                            </MDBRow>
+                            <MDBRow style={{padding: "8px"}}>
+                                <CreateNoteDropdown addNote={addNote} />
                             </MDBRow>
                         </MDBCol>
                     </MDBRow>
