@@ -1,9 +1,5 @@
 import React, { createContext } from "react";
-import {
-  NoteBox,
-  Note,
-  NeatFile
-} from "../models";
+import { NoteBox, NeatFile, Note } from "../models";
 
 const neatContextState: NeatContextState = {
   fileIndex: 0,

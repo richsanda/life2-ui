@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import NeatContext from "../../contexts/NeatContext";
 import ArtifactAPI from "../../hooks/artifactApi";
-import { NeatFile } from "../../models";
+import { NeatFile, Note } from "../../models";
 import './imageHoverStyle.css';
 
 const FeaturePane = (props) => {
@@ -34,17 +34,19 @@ const FeaturePane = (props) => {
 
         let nextIndex = fileIndex + count;
 
-        let nextFile = noteBox ? noteBox.files[nextIndex] : notes ? notes[nextIndex].file : undefined;
+        let nextFile = noteBox ? noteBox.files[nextIndex] : notes ? notes[nextIndex].key : undefined;
 
         if (!nextFile) return;
 
-        ArtifactAPI.readNote(nextFile.folder, nextFile.filename).then((response) => {
 
+        ArtifactAPI.readNote("nextFile.folder", "nextFile.filename").then((response) => {
+
+            
             setNeatContext({
                 ...neatContext,
                 fileIndex: nextIndex,
                 note: response ? response : notes[nextIndex],
-                file: nextFile,
+                //file: nextFile,
                 comment: response ? response.text : notes[nextIndex].text
             })
         });

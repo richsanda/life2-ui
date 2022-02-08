@@ -5,3 +5,4 @@ export * from "./artifactSearchResponse";
 export * from "./artifact";
 export * from "./email";
 export * from "./auxiliary";
+export * from "./note";

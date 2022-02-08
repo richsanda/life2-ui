@@ -1,3 +1,5 @@
+import { Note } from "./note";
+
 export interface NeatFile {
     folder: string;
     filename: string;
@@ -12,13 +14,6 @@ export interface NoteBox {
     key: string;
     files: NeatFile[];
     notes: Note[];
-}
-
-export interface Note {
-    key: string;
-    text: string;
-    file: NeatFile;
-    data?: any;
 }
 
 export interface Person {

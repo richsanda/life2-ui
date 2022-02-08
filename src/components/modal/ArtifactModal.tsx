@@ -154,7 +154,7 @@ const ArtifactModal = (props) => {
                             </MDBRow>
                            
                             <MDBRow>
-                                <Accordion activeKey={"" + activeKey} defaultActiveKey={null} alwaysOpen>
+                                <Accordion activeKey={"" + activeKey} defaultActiveKey={null}>
 
                                     {notes.map((n, i) => {
 

@@ -24,17 +24,18 @@ function initNoteBox(folder: string, files: NeatFile[]): NoteBox {
     let noteBox: NoteBox = {
         key: folder,
         files: files,
-        notes: files.map((file) => {
-            return(
-                {
-                    key: file.filename,
-                    text: "",
-                    pointers: [file.filename],
-                    file: file,
-                    data: {}
-                }
-            )
-        })
+        notes: []
+        // notes: files.map((file) => {
+        //     return(
+        //         {
+        //             key: file.filename,
+        //             text: "",
+        //             pointers: [file.filename],
+        //             file: file,
+        //             data: {}
+        //         }
+        //     )
+        // })
     }
     
     return noteBox;

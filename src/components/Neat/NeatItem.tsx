@@ -12,7 +12,7 @@ const NeatItem = (props) => {
 
   const [neatContext, setNeatContext] = useContext(NeatContext);
   const { noteBoxes, folder, notes, fileIndex, noteBox, note : currentNote } = neatContext;
-  const isCurrent = note.file?.filename == currentNote?.file?.filename;
+  const isCurrent = note.file?.filename == currentNote?.key;
 
   const move = (count: number) => {
 
@@ -20,8 +20,8 @@ const NeatItem = (props) => {
 
     setNeatContext({
       ...neatContext,
-      fileIndex: nextIndex,
-      file: notes[nextIndex].file
+      fileIndex: nextIndex
+      // file: notes[nextIndex].key
     })
   }
 
