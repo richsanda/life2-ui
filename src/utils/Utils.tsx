@@ -52,6 +52,12 @@ function prettyDate(datestr: string) {
     return datestr ? moment(datestr).format("MMM DD, YYYY").toLowerCase() : "";
 }
 
+const noteExpression = /[@!$]\[([a-zA-Z0-9._: -]*)\]\([a-zA-Z0-9._: -]*\)/g;
+
+function prettyNote(str : string) {
+    return str ? str.replace(noteExpression, (exp, text) => `[${text}]`) : ""
+}
+
 function bodyify(text) {
     if (!text) return null;
     return renderHTML("<div><br/>" + text.replace(/(?:\r\n|\r|\n)/g, "<br/>") + "</div>");
@@ -70,4 +76,4 @@ const updateToken = () => {
     sessionStorage.setItem("token", Buffer.from(`${username}:${password}`).toString('base64'));
 }
 
-export { rangeOfYearMonthsWithCounts, startOfMonth, endOfMonth, prettyDate, bodyify, preify, updateToken }
+export { rangeOfYearMonthsWithCounts, startOfMonth, endOfMonth, prettyDate, prettyNote, bodyify, preify, updateToken }

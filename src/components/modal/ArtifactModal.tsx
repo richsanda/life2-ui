@@ -1,4 +1,4 @@
-import { prettyDate } from "../../utils/Utils";
+import { prettyDate, prettyNote } from "../../utils/Utils";
 import { Accordion, Button, ButtonGroup, Card, CloseButton, Dropdown, Modal, useAccordionButton } from "react-bootstrap";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import '../../styles/styles.css';
@@ -29,19 +29,20 @@ function CustomToggle({ children, eventKey, handleEventKey }) {
 
 const ArtifactNote = (props) => {
 
-    const { content, index, removeNote, toggleNote, personOptions } = props;
+    const { content, index, removeNote, toggleNote, personOptions, onChange } = props;
 
-    return (<Card>
-        <Card.Header style={{ fontSize: ".75em", cursor: "pointer", padding: "2px" }}>
+    return (
+    <Card>
+        <Card.Header style={{ textAlign: "left", fontSize: ".75em", cursor: "pointer", padding: "2px" }}>
             <CloseButton style={{ float: "right" }} onClick={() => removeNote(index)} />
-            <CustomToggle eventKey={"" + index} handleEventKey={toggleNote}>{content}</CustomToggle>
+            <CustomToggle eventKey={"" + index} handleEventKey={toggleNote}>{prettyNote(content.split("\n")[0])}&nbsp;</CustomToggle>
         </Card.Header>
         <Accordion.Collapse eventKey={"" + index}>
             <Card.Body style={{ padding: "0px", fontSize: ".75em" }}>
                 <CommentaryBox
                     personOptions={personOptions}
                     value={content}
-                    onChange={() => { }}
+                    onChange={onChange}
                     onAdd={() => { }}
                 />
             </Card.Body>
@@ -54,7 +55,7 @@ const CreateNoteDropdown = (props) => {
     const { addNote } = props;
 
     return (<Dropdown as={ButtonGroup}>
-        <Button style={{ fontSize: ".75em" }} size="sm" onClick={() => addNote("whatever")}>+ note</Button>
+        <Button style={{ fontSize: ".75em" }} size="sm" onClick={() => addNote("")}>+ note</Button>
         <Dropdown.Toggle split style={{ fontSize: ".75em" }} id="dropdown-basic" />
         <Dropdown.Menu>
             <Dropdown.Item size="sm" style={{ fontSize: ".75em" }} onClick={() => addNote("$$receipt")}>receipt</Dropdown.Item>
@@ -66,19 +67,26 @@ const CreateNoteDropdown = (props) => {
 
 const ArtifactModal = (props) => {
 
+    const {
+        show,
+        artifact,
+        commentary,
+        notes,
+        relativeKeys,
+        relativeKeyIndex,
+        handleSelect,
+        handleChange,
+        setNotes,
+        handleClose } = props;
+
     const [personOptions, setPersonOptions] = useState<Person[]>([]);
-    const [troveOptions, setTroveOptions] = useState<Trove[]>([]);
-  
+
     useEffect(() => {
       ArtifactAPI.persons().then((response) => {
         setPersonOptions(response);
       })
-      ArtifactAPI.troves().then((response) => {
-        setTroveOptions(response);
-      })
     }, [])
 
-    const [notes, setNotes] = useState<string[]>([]);
     const [activeKey, setActiveKey] = useState<number>(0);
 
     const addNote = (content) => {
@@ -97,16 +105,6 @@ const ArtifactModal = (props) => {
             setActiveKey(toggleKey);
         }
     }
-
-    const {
-        show,
-        artifact,
-        commentary,
-        relativeKeys,
-        relativeKeyIndex,
-        handleSelect,
-        handleChange,
-        handleClose } = props;
 
     return (
         <Modal size="lg" show={show} onHide={handleClose}>
@@ -156,16 +154,22 @@ const ArtifactModal = (props) => {
                             </MDBRow>
                            
                             <MDBRow>
-                                <Accordion activeKey={"" + activeKey} defaultActiveKey={null}>
+                                <Accordion activeKey={"" + activeKey} defaultActiveKey={null} alwaysOpen>
 
                                     {notes.map((n, i) => {
 
                                         return (<ArtifactNote
                                             content={n}
                                             index={i}
+                                            key={"note" + i}
                                             toggleNote={toggleNote}
                                             removeNote={removeNote}
                                             personOptions={personOptions}
+                                            onChange={(e, val) => { 
+                                                let tmp = [ ...notes];
+                                                tmp[i] = val;
+                                                setNotes(tmp);
+                                             }}
                                         />);
                                     })}
                                 </Accordion>
