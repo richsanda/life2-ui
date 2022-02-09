@@ -2,8 +2,8 @@ import { useDebugValue, useEffect, useState } from 'react'
 
 import { Mention, MentionsInput } from 'react-mentions'
 
-import defaultStyle from '../Neat/defaultStyle'
-import defaultMentionStyle from '../Neat/defaultMentionStyle'
+import defaultStyle from '../../styles/defaultStyle'
+import defaultMentionStyle from '../../styles/defaultMentionStyle'
 import { Person, Trove } from '../../models';
 import ArtifactAPI from '../../hooks/artifactApi';
 

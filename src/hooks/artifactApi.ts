@@ -49,9 +49,9 @@ class ArtifactAPI {
     return response;
   };
 
-  public static updateNote = async (folder: string, filename: string, body: Note) => {
+  public static updateNote = async (trove: string, filename: string, body: Note) => {
     let response = await ArtifactAPI.request<Note, Note>(
-      `note/${folder}/${filename}`,
+      `note/${trove}/${filename}`,
       "post",
       body
     );

@@ -10,7 +10,7 @@ const ResultRow = (props) => {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => { setShow(false); updateNote(); }
     const handleShow = () => setShow(true);
 
     const { artifact, index } = props;
@@ -25,30 +25,32 @@ const ResultRow = (props) => {
 
         retrieveArtifact(
             artifact.trove,
-            artifact.key, 
+            artifact.key,
             (response) => {
-            setArtfactData(response);
-            setCommetary(response.description);
-            setNotes(response.notes);
-            setRelativeKeys(response.relative_keys);
-            setRelativeKeyIndex(response.relative_key_index);
-            handleShow();
-        });
+                setArtfactData(response);
+                setCommetary(response.description);
+                setNotes(response.notes);
+                setRelativeKeys(response.relative_keys);
+                setRelativeKeyIndex(response.relative_key_index);
+                handleShow();
+            });
     };
 
-    const handleSelect = (index) => {
+    const handleSelect = (newIndex) => {
 
-        const parts = relativeKeys[index].split("/");
+        updateNote();
+
+        const troveAndKey = relativeKeys[newIndex].split("/");
 
         retrieveArtifact(
-            parts[0],
-            parts[1], 
+            troveAndKey[0],
+            troveAndKey[1],
             (response) => {
-            setArtfactData(response);
-            setCommetary(response.description);
-            setNotes(response.notes);
-            setRelativeKeyIndex(index);
-        });
+                setArtfactData(response);
+                setCommetary(response.description);
+                setNotes(response.notes);
+                setRelativeKeyIndex(newIndex);
+            });
     };
 
     const retrieveArtifact = (trove, key, callback) => {
@@ -58,6 +60,25 @@ const ResultRow = (props) => {
             .catch((e) => {
                 alert("error retrieving artifact with id: " + key + " " + e);
             });
+    }
+
+    const updateNote = () => {
+
+        const troveAndKey = relativeKeys[relativeKeyIndex].split("/");
+        const trove = troveAndKey[0];
+        const key = troveAndKey[1];
+
+        const updatedNote = {
+            trove: trove,
+            key: key,
+            text: commentary,
+            notes: notes
+        }
+
+        ArtifactAPI.updateNote(trove, key, updatedNote)
+            .then((response) => {
+                console.log("updated note: " + trove + "/" + key)
+            })
     }
 
     return (
