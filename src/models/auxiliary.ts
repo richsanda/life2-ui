@@ -21,7 +21,10 @@ export interface Person {
     emails: string[];
 }
 
-
 export interface Trove {
+    name: string;
+}
+
+export interface Tag {
     name: string;
 }

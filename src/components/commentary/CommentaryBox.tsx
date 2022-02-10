@@ -1,11 +1,8 @@
-import { useDebugValue, useEffect, useState } from 'react'
-
 import { Mention, MentionsInput } from 'react-mentions'
 
 import defaultStyle from '../../styles/defaultStyle'
 import defaultMentionStyle from '../../styles/defaultMentionStyle'
-import { Person, Trove } from '../../models';
-import ArtifactAPI from '../../hooks/artifactApi';
+import { Person, Tag, Trove } from '../../models';
 
 interface CommentaryBoxProps {
     value, 
@@ -13,12 +10,20 @@ interface CommentaryBoxProps {
     onAdd, 
     personOptions ?: Person[],
     troveOptions ?: Trove[],
+    tagOptions ?: Tag[],
     onKeyPress ?: any
 }
 
 function CommentaryBox(props : CommentaryBoxProps) {
 
-  const { value, onChange, onAdd, personOptions = [], troveOptions = [], onKeyPress } = props;
+  const { 
+    value, 
+    onChange, 
+    onAdd, 
+    personOptions = [], 
+    troveOptions = [], 
+    tagOptions = [],
+    onKeyPress } = props;
 
   return (
     <div>
@@ -72,7 +77,7 @@ function CommentaryBox(props : CommentaryBoxProps) {
         <Mention
           markup="#[__display__](tag:__id__)"
           trigger="#"
-          data={[]}
+          data={tagOptions.map((p) => { return { id: p.name, display: p.name }})}
           renderSuggestion={(
             suggestion,
             search,

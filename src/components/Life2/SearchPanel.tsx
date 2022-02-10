@@ -2,13 +2,14 @@ import { Button } from "react-bootstrap";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import CommentaryBox from "../commentary/CommentaryBox";
 import { useEffect, useState } from "react";
-import { Person, Trove } from "../../models";
+import { Person, Tag, Trove } from "../../models";
 import ArtifactAPI from "../../hooks/artifactApi";
 
 const SearchPanel = (props) => {
 
     const [personOptions, setPersonOptions] = useState<Person[]>([]);
     const [troveOptions, setTroveOptions] = useState<Trove[]>([]);
+    const [tagOptions, setTagOptions] = useState<Tag[]>([]);
   
     useEffect(() => {
       ArtifactAPI.persons().then((response) => {
@@ -16,6 +17,9 @@ const SearchPanel = (props) => {
       })
       ArtifactAPI.troves().then((response) => {
         setTroveOptions(response);
+      })
+      ArtifactAPI.tags().then((response) => {
+        setTagOptions(response);
       })
     }, [])
 
@@ -45,6 +49,7 @@ const SearchPanel = (props) => {
                     value={searchText}
                     personOptions={personOptions}
                     troveOptions={troveOptions}
+                    tagOptions={tagOptions}
                     />
                 </MDBCol>
             </MDBRow>
