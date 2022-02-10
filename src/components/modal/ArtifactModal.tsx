@@ -38,7 +38,7 @@ const ArtifactNote = (props) => {
             <CustomToggle eventKey={"" + index} handleEventKey={toggleNote}>{prettyNote(content.split("\n")[0])}&nbsp;</CustomToggle>
         </Card.Header>
         <Accordion.Collapse eventKey={"" + index}>
-            <Card.Body style={{ padding: "0px", fontSize: ".75em" }}>
+            <Card.Body style={{padding: "5px"}}>
                 <CommentaryBox
                     personOptions={personOptions}
                     value={content}
@@ -77,6 +77,7 @@ const ArtifactModal = (props) => {
         handleSelect,
         handleChange,
         setNotes,
+        handleSave,
         handleClose } = props;
 
     const [personOptions, setPersonOptions] = useState<Person[]>([]);
@@ -112,7 +113,7 @@ const ArtifactModal = (props) => {
                 <Modal.Title>
                     {prettyDate(artifact.when)} &#8212; {artifact.title}
                 </Modal.Title>
-                <Button style={{ fontSize: ".75em" }} variant="primary" onClick={handleClose}>
+                <Button style={{ fontSize: ".75em" }} variant="primary" onClick={handleSave}>
                     save
                 </Button>
             </Modal.Header>

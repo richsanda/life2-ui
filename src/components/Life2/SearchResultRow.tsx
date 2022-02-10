@@ -10,8 +10,9 @@ const ResultRow = (props) => {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => { setShow(false); updateNote(); }
+    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleSave = () => { handleClose(); updateNote(); }
 
     const { artifact, index } = props;
 
@@ -30,8 +31,8 @@ const ResultRow = (props) => {
                 setArtfactData(response);
                 setCommetary(response.description);
                 setNotes(response.notes);
-                setRelativeKeys(response.relative_keys);
-                setRelativeKeyIndex(response.relative_key_index);
+                setRelativeKeys(response.relative_keys || [artifact.trove + "/"+ artifact.key]);
+                setRelativeKeyIndex(response.relative_key_index || 0);
                 handleShow();
             });
     };
@@ -63,6 +64,8 @@ const ResultRow = (props) => {
     }
 
     const updateNote = () => {
+
+        console.log(relativeKeys[relativeKeyIndex]);
 
         const troveAndKey = relativeKeys[relativeKeyIndex].split("/");
         const trove = troveAndKey[0];
@@ -101,6 +104,7 @@ const ResultRow = (props) => {
                 handleChange={(e, val) => setCommetary(val)}
                 setNotes={setNotes}
                 handleClose={handleClose}
+                handleSave={handleSave}
                 artifact={artifactData} />
         </>
     )
