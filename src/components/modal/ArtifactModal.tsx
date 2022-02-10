@@ -38,7 +38,7 @@ const ArtifactNote = (props) => {
             <CustomToggle eventKey={"" + index} handleEventKey={toggleNote}>{prettyNote(content.split("\n")[0])}&nbsp;</CustomToggle>
         </Card.Header>
         <Accordion.Collapse eventKey={"" + index}>
-            <Card.Body style={{padding: "5px"}}>
+            <Card.Body style={{padding: "4px"}}>
                 <CommentaryBox
                     personOptions={personOptions}
                     value={content}
@@ -107,6 +107,8 @@ const ArtifactModal = (props) => {
         }
     }
 
+    console.log(artifact.types);
+
     return (
         <Modal size="lg" show={show} onHide={handleClose}>
             <Modal.Header>
@@ -130,7 +132,7 @@ const ArtifactModal = (props) => {
 
                                     <EmailFeature artifact={artifact} />
 
-                                ) : (artifact.types.indexOf("note") > -1) ?
+                                ) : (artifact.types.indexOf("neat") > -1) ?
 
                                     (<ArtifactImageFeature
                                         artifact={artifact}

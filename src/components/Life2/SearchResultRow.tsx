@@ -27,6 +27,7 @@ const ResultRow = (props) => {
         retrieveArtifact(
             artifact.trove,
             artifact.key,
+            true,
             (response) => {
                 setArtfactData(response);
                 setCommetary(response.description);
@@ -46,6 +47,7 @@ const ResultRow = (props) => {
         retrieveArtifact(
             troveAndKey[0],
             troveAndKey[1],
+            false,
             (response) => {
                 setArtfactData(response);
                 setCommetary(response.description);
@@ -54,9 +56,9 @@ const ResultRow = (props) => {
             });
     };
 
-    const retrieveArtifact = (trove, key, callback) => {
+    const retrieveArtifact = (trove, key, relatives, callback) => {
 
-        ArtifactAPI.artifactRead(trove, key)
+        ArtifactAPI.artifactRead(trove, key, relatives)
             .then(callback)
             .catch((e) => {
                 alert("error retrieving artifact with id: " + key + " " + e);
@@ -64,8 +66,6 @@ const ResultRow = (props) => {
     }
 
     const updateNote = () => {
-
-        console.log(relativeKeys[relativeKeyIndex]);
 
         const troveAndKey = relativeKeys[relativeKeyIndex].split("/");
         const trove = troveAndKey[0];

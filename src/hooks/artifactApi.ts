@@ -24,8 +24,8 @@ class ArtifactAPI {
     return response;
   };
 
-  public static artifactRead = async (trove: string, key: string) => {
-    let response = await ArtifactAPI.request<Artifact>(`/artifact/rich.s/${trove}/${key}`);
+  public static artifactRead = async (trove: string, key: string, relatives: boolean) => {
+    let response = await ArtifactAPI.request<Artifact>(`/artifact/rich.s/${trove}/${key}?relatives=${relatives}`);
     return response;
   };
 
