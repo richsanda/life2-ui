@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
-import { ArtifactCountsResponse, ArtifactSearchRequest } from "../../models";
+import React, { useState } from "react";
+import { ArtifactSearchRequest } from "../../models";
 import ArtifactAPI from "../../hooks/artifactApi";
-import searchRequest from "../../utils/requestTemplates.json";
-import ArtifactContext from "../../contexts/ArtifactContext";
 import { startOfMonth, endOfMonth } from "../../utils/Utils";
+import { artifactSearch } from "../../utils/requestTemplates.json";
 
 const MonthBox = (props) => {
 
-    const [artifactsContext, setArtifactsContext] = useContext(ArtifactContext);
-    const { searchRequest, from, to } = artifactsContext;
+    const [searchRequest, setSearchRequest] = useState<ArtifactSearchRequest>(artifactSearch);
+    const [from, setFrom] = useState<string[]>([]);
+    const [to, setTo] = useState<string[]>([]);
 
-    const { searchText, monthBox, selected, index, maxBoxCount } = props;
+    const { searchText, monthBox, selected, index, maxBoxCount, setSearchResponse } = props;
     const { count, year, month, header} = monthBox;
     const after = startOfMonth(year, month);
     const before = endOfMonth(year, month)
@@ -29,10 +29,7 @@ const MonthBox = (props) => {
 
         ArtifactAPI.artifactSearch(request)
             .then((response) => {
-                setArtifactsContext({
-                    ...artifactsContext,
-                    "searchResponse": response
-                });
+                setSearchResponse(response);
             })
             .catch(() => {
                 alert("error");
@@ -46,7 +43,7 @@ const MonthBox = (props) => {
             style={{ opacity: opacity? opacity : 1}}
             key={`${year}.${month}.${count}`}
             onClick={monthBoxClick}
-            title={`${count}`}
+            title={`${month}.${year}: ${count}`}
         >
             {header && year.toString().substr(2, 3) || ''} 
         </div>

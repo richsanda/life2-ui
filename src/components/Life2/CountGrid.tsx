@@ -1,22 +1,17 @@
-import React, { useContext, useState } from "react";
 import { rangeOfMonths } from "../../utils/data.json";
-import ArtifactContext from "../../contexts/ArtifactContext";
 import MonthBox from "./MonthBox"
 import '../../styles/styles.css'
 
 const CountGrid = (props) => {
 
-    const { searchText } = props;
-
-    const [artifactsContext, setArtifactsContext] = useContext(ArtifactContext);
-    const { searchRequest, countsResponse, maxBoxCount, monthSelected } = artifactsContext;
+    const { searchText, countsResponse, maxBoxCount, setSearchResponse } = props;
 
     return (
         <div className="grid" id="counts">
             <div className="plain-month-box">&nbsp;</div>
             {rangeOfMonths.map((m, index) => {
                 return (
-                    <div key={`${index}`} className="plain-month-box" data-ng-repeat="m in rangeOfMonths">{m}</div>
+                    <div key={`${index}`} className="plain-month-box">{m}</div>
                 );
             })}
             {countsResponse.map((monthBox, index) => {
@@ -26,7 +21,8 @@ const CountGrid = (props) => {
                     key={`${monthBox.year}.${monthBox.month}.${index}`} 
                     monthBox={monthBox} 
                     selected={false} 
-                    maxBoxCount={maxBoxCount} />
+                    maxBoxCount={maxBoxCount}
+                    setSearchResponse={setSearchResponse} />
                 )
             })}
         </div>
