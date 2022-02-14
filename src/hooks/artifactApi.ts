@@ -34,8 +34,8 @@ class ArtifactAPI {
     return response;
   };
 
-  public static readNeatFolder = async (folder: string) => {
-    let response = await ArtifactAPI.request<NeatFile[]>(`neat/${folder}`);
+  public static readTrove = async (trove: string) => {
+    let response = await ArtifactAPI.request<Note[]>(`notes/${trove}`);
     return response;
   };
 
@@ -46,6 +46,15 @@ class ArtifactAPI {
 
   public static readNote = async (folder: string, filename: string) => {
     let response = await ArtifactAPI.request<Note | undefined>(`note/${folder}/${filename}`);
+    return response;
+  };
+
+  public static addNote = async (trove: string, body: Note) => {
+    let response = await ArtifactAPI.request<Note, Note>(
+      `note/${trove}`,
+      "post",
+      body
+    );
     return response;
   };
 

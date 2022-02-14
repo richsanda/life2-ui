@@ -8,6 +8,8 @@ import SearchPane from "../components/Life2/SearchPane"
 import { ArtifactCountsRequest, ArtifactCountsResponse, ArtifactSearchRequest, ArtifactSearchResponse } from "../models";
 import ArtifactAPI from "../hooks/artifactApi";
 import { artifactCounts, artifactSearch } from "../utils/requestTemplates.json";
+import { Button } from "react-bootstrap";
+import NewArtifactButton from "../components/modal/NewArtifactButton";
 
 const Life2 = () => {
 
@@ -39,22 +41,49 @@ const Life2 = () => {
             });
     };
 
+    const life2 = () => {
+
+        let updatedSearch = {
+            ...searchRequest,
+            after: undefined,
+            before: undefined,
+            who: [],
+            troves: ["life2"],
+            text: ""
+        }
+
+        ArtifactAPI.artifactSearch(updatedSearch)
+            .then((response) => {
+                setSearchResponse(response);
+            })
+            .catch(() => {
+                alert("error");
+            });
+    }
+
     return (
         <MDBContainer>
             <MDBRow>
                 <MDBCol md="6">
-                    <SearchPane 
-                    searchText={searchText} 
-                    setSearchText={setSearchText}
-                    counts={counts}
-                    countsResponse={countsResponse}
-                    setSearchResponse={setSearchResponse}
-                    maxBoxCount={maxBoxCount}/>
+                    <SearchPane
+                        searchText={searchText}
+                        setSearchText={setSearchText}
+                        counts={counts}
+                        countsResponse={countsResponse}
+                        setSearchResponse={setSearchResponse}
+                        maxBoxCount={maxBoxCount} />
                 </MDBCol>
                 <MDBCol md="6">
                     <MDBRow>
+                        <MDBCol md="12">
+                            <NewArtifactButton onSave={life2} />
+                            &nbsp;&nbsp;
+                            <Button variant="primary" onClick={life2}>&#8635;</Button>
+                        </MDBCol>
+                    </MDBRow>
+                    <MDBRow>
                         <MDBCol md="12" className="scrollable">
-                            <SearchResults searchResponse={searchResponse}/>
+                            <SearchResults searchResponse={searchResponse} />
                         </MDBCol>
                     </MDBRow>
                 </MDBCol>

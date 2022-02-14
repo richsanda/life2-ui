@@ -41,8 +41,9 @@ const SearchPane = (props) => {
                         searchText={searchText}
                         setSearchText={setSearchText}
                         counts={counts}
-                        countsResponse={countsResponse}
+                        countsResponse={[]}
                         maxBoxCount={maxBoxCount}
+                        setSearchResponse={setSearchResponse}
                     />
                 </MDBCol>
             </MDBRow>

@@ -7,54 +7,56 @@ import ArtifactAPI from "../../hooks/artifactApi";
 
 const SearchPanel = (props) => {
 
-    const [personOptions, setPersonOptions] = useState<Person[]>([]);
-    const [troveOptions, setTroveOptions] = useState<Trove[]>([]);
-    const [tagOptions, setTagOptions] = useState<Tag[]>([]);
-  
-    useEffect(() => {
-      ArtifactAPI.persons().then((response) => {
-        setPersonOptions(response);
-      })
-      ArtifactAPI.troves().then((response) => {
-        setTroveOptions(response);
-      })
-      ArtifactAPI.tags().then((response) => {
-        setTagOptions(response);
-      })
-    }, [])
+  const [personOptions, setPersonOptions] = useState<Person[]>([]);
+  const [troveOptions, setTroveOptions] = useState<Trove[]>([]);
+  const [tagOptions, setTagOptions] = useState<Tag[]>([]);
 
-    const { searchText, setSearchText, counts } = props;
+  useEffect(() => {
+    ArtifactAPI.persons().then((response) => {
+      setPersonOptions(response);
+    })
+    ArtifactAPI.troves().then((response) => {
+      setTroveOptions(response);
+    })
+    ArtifactAPI.tags().then((response) => {
+      setTagOptions(response);
+    })
+  }, [])
 
-    const onKeyPress = (event) => {
-        if(event.key === 'Enter'){
-          counts();
-        }
-      }
+  const { searchText, setSearchText, counts } = props;
 
-    const onChange = (e, val) => {
-        setSearchText(val);
+  const onKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      counts();
     }
+  }
 
-    return (
-        <MDBContainer>
-            <MDBRow>
-                <MDBCol md="4">
-                    <Button variant="primary" onClick={counts}>go</Button>
-                </MDBCol>
-                <MDBCol md="8">
-                    <CommentaryBox 
-                    onKeyPress={onKeyPress}
-                    onChange={onChange}
-                    onAdd={(...args) => console.log(searchText)}
-                    value={searchText}
-                    personOptions={personOptions}
-                    troveOptions={troveOptions}
-                    tagOptions={tagOptions}
-                    />
-                </MDBCol>
-            </MDBRow>
-        </MDBContainer>
-    );
+  const onChange = (e, val) => {
+    setSearchText(val);
+  }
+
+  return (
+
+    <MDBContainer>
+      <MDBRow>
+        <MDBCol md="4">
+          <Button variant="primary" onClick={counts}>go</Button>
+        </MDBCol>
+        <MDBCol md="8">
+          <CommentaryBox
+            onKeyPress={onKeyPress}
+            onChange={onChange}
+            onAdd={(...args) => console.log(searchText)}
+            value={searchText}
+            personOptions={personOptions}
+            troveOptions={troveOptions}
+            tagOptions={tagOptions}
+          />
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
+
+  );
 };
 
 export default SearchPanel;

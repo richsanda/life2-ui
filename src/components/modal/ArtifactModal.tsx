@@ -1,5 +1,5 @@
-import { prettyDate, prettyNote } from "../../utils/Utils";
-import { Accordion, Button, ButtonGroup, Card, CloseButton, Dropdown, Modal, useAccordionButton } from "react-bootstrap";
+import { prettyDate } from "../../utils/Utils";
+import { Accordion, Button, Modal } from "react-bootstrap";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import '../../styles/styles.css';
 import '../../styles/magnifier.less';
@@ -8,7 +8,7 @@ import ArtifactImageFeature from "./ArtifactImageFeature";
 import EmailFeature from "./EmailFeature";
 import CommentaryBox from "../commentary/CommentaryBox";
 import { useEffect, useState } from "react";
-import { Person, Trove } from "../../models";
+import { Person } from "../../models";
 import ArtifactAPI from "../../hooks/artifactApi";
 import ArtifactNote from "./ArtifactNote";
 import CreateNoteDropdown from "./CreateNoteDropdown";
@@ -59,7 +59,7 @@ const ArtifactModal = (props) => {
         <Modal size="lg" show={show} onHide={handleClose}>
             <Modal.Header>
                 <Modal.Title>
-                    {prettyDate(artifact.when)} &#8212; {artifact.title}
+                    {prettyDate(artifact?.when)} &#8212; {artifact?.title}
                 </Modal.Title>
                 <Button style={{ fontSize: ".75em" }} variant="primary" onClick={handleSave}>
                     save
@@ -70,9 +70,14 @@ const ArtifactModal = (props) => {
                     <MDBRow>
                         <MDBCol md="8">
                             {
-                                (!!!artifact.types) ? (
+                                (!!!artifact?.types) ? (
 
-                                    <></>
+                                    <CommentaryBox
+                                    value={commentary}
+                                    onChange={handleChange}
+                                    personOptions={personOptions}
+                                    onAdd={() => { }}
+                                />
 
                                 ) : (artifact.types.indexOf("email") > -1) ? (
 
@@ -94,12 +99,14 @@ const ArtifactModal = (props) => {
                         </MDBCol>
                         <MDBCol md="4">
                             <MDBRow>
+                            { (artifact?.types) ? (
                                 <CommentaryBox
                                     value={commentary}
                                     onChange={handleChange}
                                     personOptions={personOptions}
                                     onAdd={() => { }}
                                 />
+                            ) : (<></>)}
                             </MDBRow>
                            
                             <MDBRow>

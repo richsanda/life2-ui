@@ -1,8 +1,14 @@
+    .col-md-2 {
+        padding: 1rem;
+        background-color: #dfe7f5;
+        border: 2px solid #fff;
+        color: #193057;
+        text-align: center;
+    }
 
     .col-md-4 {
         padding: 1rem;
         background-color: #dfe7f5;
-        border: 2px solid #fff;
         color: #193057;
         text-align: center;
     }
@@ -34,7 +40,6 @@
     .col-md-8 {
         padding: 1rem;
         background-color: #dfe7f5;
-        border: 2px solid #fff;
         color: #193057;
         text-align: center;
     }
