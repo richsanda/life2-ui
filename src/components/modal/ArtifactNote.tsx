@@ -20,7 +20,7 @@ function CustomToggle({ children, eventKey, handleEventKey }) {
 
 const ArtifactNote = (props) => {
 
-    const { content, index, removeNote, toggleNote, personOptions, onChange } = props;
+    const { content, index, removeNote, toggleNote, personOptions, tagOptions, onChange } = props;
 
     return (
     <Card>
@@ -32,6 +32,7 @@ const ArtifactNote = (props) => {
             <Card.Body style={{padding: "4px"}}>
                 <CommentaryBox
                     personOptions={personOptions}
+                    tagOptions={tagOptions}
                     value={content}
                     onChange={onChange}
                     onAdd={() => { }}

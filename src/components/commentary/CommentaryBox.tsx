@@ -115,7 +115,7 @@ function CommentaryBox(props : CommentaryBoxProps) {
         <Mention
           markup="$[__display__](field:__id__)"
           trigger="$"
-          data={fieldNames.map(fn => { return { display: fn + ':', id: fn } })}
+          data={fieldNames.map(fn => { return { display: fn, id: fn } })}
           renderSuggestion={(
             suggestion,
             search,
@@ -202,7 +202,11 @@ const artifactTypes = [
   "check",
   "pass",
   "badge",
-  "slip"
+  "slip",
+  "apartment",
+  "gathering",
+  "party",
+  "house"
 ]
 const fieldNames = [
   "from",
@@ -219,7 +223,9 @@ const fieldNames = [
   "items",
   "event",
   "amount",
-  "author"
+  "author",
+  "title",
+  "artist"
 ]
 
 export default CommentaryBox;

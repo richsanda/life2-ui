@@ -1,4 +1,4 @@
-import { prettyDate } from "../../utils/Utils";
+import { prettyDate, prettyNote } from "../../utils/Utils";
 import { Accordion, Button, Modal } from "react-bootstrap";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import '../../styles/styles.css';
@@ -8,7 +8,7 @@ import ArtifactImageFeature from "./ArtifactImageFeature";
 import EmailFeature from "./EmailFeature";
 import CommentaryBox from "../commentary/CommentaryBox";
 import { useEffect, useState } from "react";
-import { Person } from "../../models";
+import { Person, Tag } from "../../models";
 import ArtifactAPI from "../../hooks/artifactApi";
 import ArtifactNote from "./ArtifactNote";
 import CreateNoteDropdown from "./CreateNoteDropdown";
@@ -29,10 +29,14 @@ const ArtifactModal = (props) => {
         handleClose } = props;
 
     const [personOptions, setPersonOptions] = useState<Person[]>([]);
+    const [tagOptions, setTagOptions] = useState<Tag[]>([]);
 
     useEffect(() => {
       ArtifactAPI.persons().then((response) => {
         setPersonOptions(response);
+      })
+      ArtifactAPI.tags().then((response) => {
+        setTagOptions(response);
       })
     }, [])
 
@@ -59,7 +63,10 @@ const ArtifactModal = (props) => {
         <Modal size="lg" show={show} onHide={handleClose}>
             <Modal.Header>
                 <Modal.Title>
-                    {prettyDate(artifact?.when)} &#8212; {artifact?.title}
+                    {  
+                    (!!!artifact?.types) ? (prettyNote(commentary.split('\n')[0])) : 
+                    (<>{prettyDate(artifact?.when)} &#8212; {artifact?.title}</>) 
+                    }
                 </Modal.Title>
                 <Button style={{ fontSize: ".75em" }} variant="primary" onClick={handleSave}>
                     save
@@ -76,6 +83,7 @@ const ArtifactModal = (props) => {
                                     value={commentary}
                                     onChange={handleChange}
                                     personOptions={personOptions}
+                                    tagOptions={tagOptions}
                                     onAdd={() => { }}
                                 />
 
@@ -104,6 +112,7 @@ const ArtifactModal = (props) => {
                                     value={commentary}
                                     onChange={handleChange}
                                     personOptions={personOptions}
+                                    tagOptions={tagOptions}
                                     onAdd={() => { }}
                                 />
                             ) : (<></>)}
@@ -121,6 +130,7 @@ const ArtifactModal = (props) => {
                                             toggleNote={toggleNote}
                                             removeNote={removeNote}
                                             personOptions={personOptions}
+                                            tagOptions={tagOptions}
                                             onChange={(e, val) => { 
                                                 let tmp = [ ...notes];
                                                 tmp[i] = val;

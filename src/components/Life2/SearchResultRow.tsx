@@ -32,7 +32,7 @@ const ResultRow = (props) => {
                 setArtfactData(response);
                 setCommentary(response.description);
                 setNotes(response.notes);
-                setRelativeKeys(response.relative_keys || [artifact.trove + "/"+ artifact.key]);
+                setRelativeKeys(response.relative_keys || [artifact.trove + "/" + artifact.key]);
                 setRelativeKeyIndex(response.relative_key_index || 0);
                 handleShow();
             });
@@ -58,11 +58,20 @@ const ResultRow = (props) => {
 
     const retrieveArtifact = (trove, key, relatives, callback) => {
 
-        ArtifactAPI.artifactRead(trove, key, relatives)
-            .then(callback)
-            .catch((e) => {
-                alert("error retrieving artifact with id: " + key + " " + e);
-            });
+        if (trove === "life2") {
+            ArtifactAPI.noteRead(trove, key, relatives)
+                .then(callback)
+                .catch((e) => {
+                    alert("error retrieving artifact with id: " + key + " " + e);
+                });
+        } else {
+
+            ArtifactAPI.artifactRead(trove, key, relatives)
+                .then(callback)
+                .catch((e) => {
+                    alert("error retrieving artifact with id: " + key + " " + e);
+                });
+        }
     }
 
     const updateNote = () => {

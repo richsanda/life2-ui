@@ -52,7 +52,7 @@ function prettyDate(datestr: string) {
     return datestr ? moment(datestr).format("MMM DD, YYYY").toLowerCase() : "";
 }
 
-const noteExpression = /[@!$]\[([a-zA-Z0-9._: -]*)\]\([a-zA-Z0-9._: -]*\)/g;
+const noteExpression = /[#@!$]\[([a-zA-Z0-9._: -]*)\]\([a-zA-Z0-9._: -]*\)/g;
 
 function prettyNote(str : string) {
     return str ? str.replace(noteExpression, (exp, text) => `[${text}]`) : ""

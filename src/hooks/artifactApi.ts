@@ -29,6 +29,11 @@ class ArtifactAPI {
     return response;
   };
 
+  public static noteRead = async (trove: string, key: string, relatives: boolean) => {
+    let response = await ArtifactAPI.request<Artifact>(`/note/rich.s/${trove}/${key}?relatives=${relatives}`);
+    return response;
+  };
+
   public static listNeatFolders = async () => {
     let response = await ArtifactAPI.request<string[]>(`neat`);
     return response;
