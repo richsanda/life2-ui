@@ -4,6 +4,7 @@ export interface Artifact {
     types: string[],
     when: string,
     when2: string,
+    when_display: string,
     title: string,
     image: string,
     description: string,

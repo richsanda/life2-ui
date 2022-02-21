@@ -32,12 +32,12 @@ const ArtifactModal = (props) => {
     const [tagOptions, setTagOptions] = useState<Tag[]>([]);
 
     useEffect(() => {
-      ArtifactAPI.persons().then((response) => {
-        setPersonOptions(response);
-      })
-      ArtifactAPI.tags().then((response) => {
-        setTagOptions(response);
-      })
+        ArtifactAPI.persons().then((response) => {
+            setPersonOptions(response);
+        })
+        ArtifactAPI.tags().then((response) => {
+            setTagOptions(response);
+        })
     }, [])
 
     const [activeKey, setActiveKey] = useState<number>(0);
@@ -63,9 +63,9 @@ const ArtifactModal = (props) => {
         <Modal size="lg" show={show} onHide={handleClose}>
             <Modal.Header>
                 <Modal.Title>
-                    {  
-                    (!!!artifact?.types) ? (prettyNote(commentary.split('\n')[0])) : 
-                    (<>{prettyDate(artifact?.when)} &#8212; {artifact?.title}</>) 
+                    {
+                        (!!!artifact?.types) ? (prettyNote(commentary.split('\n')[0])) :
+                            (<>{artifact?.when_display || prettyDate(artifact?.when)} &#8212; {artifact?.title}</>)
                     }
                 </Modal.Title>
                 <Button style={{ fontSize: ".75em" }} variant="primary" onClick={handleSave}>
@@ -80,12 +80,12 @@ const ArtifactModal = (props) => {
                                 (!!!artifact?.types) ? (
 
                                     <CommentaryBox
-                                    value={commentary}
-                                    onChange={handleChange}
-                                    personOptions={personOptions}
-                                    tagOptions={tagOptions}
-                                    onAdd={() => { }}
-                                />
+                                        value={commentary}
+                                        onChange={handleChange}
+                                        personOptions={personOptions}
+                                        tagOptions={tagOptions}
+                                        onAdd={() => { }}
+                                    />
 
                                 ) : (artifact.types.indexOf("email") > -1) ? (
 
@@ -107,40 +107,43 @@ const ArtifactModal = (props) => {
                         </MDBCol>
                         <MDBCol md="4">
                             <MDBRow>
-                            { (artifact?.types) ? (
-                                <CommentaryBox
-                                    value={commentary}
-                                    onChange={handleChange}
-                                    personOptions={personOptions}
-                                    tagOptions={tagOptions}
-                                    onAdd={() => { }}
-                                />
-                            ) : (<></>)}
+                                {(artifact?.types) ? (
+                                    <CommentaryBox
+                                        value={commentary}
+                                        onChange={handleChange}
+                                        personOptions={personOptions}
+                                        tagOptions={tagOptions}
+                                        onAdd={() => { }}
+                                    />
+                                ) : (<></>)}
                             </MDBRow>
-                           
+
                             <MDBRow>
                                 <Accordion activeKey={"" + activeKey} defaultActiveKey={null}>
 
-                                    {notes.map((n, i) => {
+                                    {
+                                        notes ?
+                                            notes.map((n, i) => {
 
-                                        return (<ArtifactNote
-                                            content={n}
-                                            index={i}
-                                            key={"note" + i}
-                                            toggleNote={toggleNote}
-                                            removeNote={removeNote}
-                                            personOptions={personOptions}
-                                            tagOptions={tagOptions}
-                                            onChange={(e, val) => { 
-                                                let tmp = [ ...notes];
-                                                tmp[i] = val;
-                                                setNotes(tmp);
-                                             }}
-                                        />);
-                                    })}
+                                                return (<ArtifactNote
+                                                    content={n}
+                                                    index={i}
+                                                    key={"note" + i}
+                                                    toggleNote={toggleNote}
+                                                    removeNote={removeNote}
+                                                    personOptions={personOptions}
+                                                    tagOptions={tagOptions}
+                                                    onChange={(e, val) => {
+                                                        let tmp = [...notes];
+                                                        tmp[i] = val;
+                                                        setNotes(tmp);
+                                                    }}
+                                                />);
+                                            }) :
+                                            <></>}
                                 </Accordion>
                             </MDBRow>
-                            <MDBRow style={{padding: "8px"}}>
+                            <MDBRow style={{ padding: "8px" }}>
                                 <CreateNoteDropdown addNote={addNote} />
                             </MDBRow>
                         </MDBCol>

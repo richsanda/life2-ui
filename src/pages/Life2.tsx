@@ -61,6 +61,24 @@ const Life2 = () => {
             });
     }
 
+    const undated = () => {
+
+        let updatedSearch = {
+            ...searchRequest,
+            after: undefined,
+            before: undefined,
+            text: searchText
+        }
+
+        ArtifactAPI.artifactSearch(updatedSearch)
+            .then((response) => {
+                setSearchResponse(response);
+            })
+            .catch(() => {
+                alert("error");
+            });
+    }
+
     return (
         <MDBContainer>
             <MDBRow>
@@ -79,6 +97,8 @@ const Life2 = () => {
                             <NewArtifactButton onSave={life2} />
                             &nbsp;&nbsp;
                             <Button variant="primary" onClick={life2}>&#8635;</Button>
+                            &nbsp;&nbsp;
+                            <Button variant="primary" onClick={undated}>&#8594;</Button>
                         </MDBCol>
                     </MDBRow>
                     <MDBRow>
