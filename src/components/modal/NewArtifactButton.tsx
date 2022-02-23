@@ -34,6 +34,7 @@ const NewArtifactButton = (props) => {
             <ArtifactModal
                 show={show}
                 commentary={commentary}
+                setCommentary={setCommentary}
                 handleChange={(e, val) => setCommentary(val)}
                 notes={notes}
                 setNotes={setNotes}

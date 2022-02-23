@@ -106,12 +106,13 @@ const ResultRow = (props) => {
             <ArtifactModal
                 show={show}
                 commentary={commentary}
+                setCommentary={setCommentary}
                 notes={notes}
+                setNotes={setNotes}
                 relativeKeys={relativeKeys}
                 relativeKeyIndex={relativeKeyIndex}
                 handleSelect={handleSelect}
                 handleChange={(e, val) => setCommentary(val)}
-                setNotes={setNotes}
                 handleClose={handleClose}
                 handleSave={handleSave}
                 artifact={artifactData} />

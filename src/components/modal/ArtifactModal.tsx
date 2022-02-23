@@ -19,12 +19,13 @@ const ArtifactModal = (props) => {
         show,
         artifact,
         commentary,
-        notes,
+        setCommentary,
+        notes = [],
+        setNotes,
         relativeKeys,
         relativeKeyIndex,
         handleSelect,
         handleChange,
-        setNotes,
         handleSave,
         handleClose } = props;
 
@@ -41,6 +42,14 @@ const ArtifactModal = (props) => {
     }, [])
 
     const [activeKey, setActiveKey] = useState<number>(0);
+
+    const onCreateNote = (content) => {
+        if ( commentary ) {
+            addNote(content);
+        } else {
+            setCommentary(content);
+        }
+    }
 
     const addNote = (content) => {
         setNotes([...notes, content]); setActiveKey(notes.length);
@@ -64,7 +73,7 @@ const ArtifactModal = (props) => {
             <Modal.Header>
                 <Modal.Title>
                     {
-                        (!!!artifact?.types) ? (prettyNote(commentary.split('\n')[0])) :
+                        (!!!artifact?.types) && commentary ? (prettyNote(commentary.split('\n')[0])) :
                             (<>{artifact?.when_display || prettyDate(artifact?.when)} &#8212; {artifact?.title}</>)
                     }
                 </Modal.Title>
@@ -106,6 +115,9 @@ const ArtifactModal = (props) => {
                             }
                         </MDBCol>
                         <MDBCol md="4">
+                            <MDBRow style={{ padding: "8px" }}>
+                                <CreateNoteDropdown onCreateNote={onCreateNote} />
+                            </MDBRow>
                             <MDBRow>
                                 {(artifact?.types) ? (
                                     <CommentaryBox
@@ -117,7 +129,6 @@ const ArtifactModal = (props) => {
                                     />
                                 ) : (<></>)}
                             </MDBRow>
-
                             <MDBRow>
                                 <Accordion activeKey={"" + activeKey} defaultActiveKey={null}>
 
@@ -142,9 +153,6 @@ const ArtifactModal = (props) => {
                                             }) :
                                             <></>}
                                 </Accordion>
-                            </MDBRow>
-                            <MDBRow style={{ padding: "8px" }}>
-                                <CreateNoteDropdown addNote={addNote} />
                             </MDBRow>
                         </MDBCol>
                     </MDBRow>
