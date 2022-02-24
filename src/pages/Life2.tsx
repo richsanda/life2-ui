@@ -17,19 +17,18 @@ const Life2 = () => {
         updateToken();
     }, [])
 
-    const [countsRequest, setCountsRequest] = useState<ArtifactCountsRequest>(artifactCounts);
-    const [countsResponse, setCountsResponse] = useState<ArtifactCountsResponse[]>([]);
-    const [searchRequest, setSearchRequest] = useState<ArtifactSearchRequest>(artifactSearch);
-    const [searchResponse, setSearchResponse] = useState<ArtifactSearchResponse[]>([]);
-    const [maxBoxCount, setMaxBoxCount] = useState<number>(0);
-    const [from, setFrom] = useState<string[]>([]);
-    const [to, setTo] = useState<string[]>([]);
-
     const [searchText, setSearchText] = useState('');
+
+    const [countsResponse, setCountsResponse] = useState<ArtifactCountsResponse[]>([]);
+    const [maxBoxCount, setMaxBoxCount] = useState<number>(0);
+    const [secondaryCountsResponse, setSecondaryCountsResponse] = useState<ArtifactCountsResponse[]>([]);
+    const [secondaryMaxBoxCount, setSecondaryMaxBoxCount] = useState<number>(0);
+
+    const [searchResponse, setSearchResponse] = useState<ArtifactSearchResponse[]>([]);
 
     const counts = async () => {
 
-        ArtifactAPI.artifactCounts({ ...countsRequest, "from": from, "to": to, "text": searchText })
+        ArtifactAPI.artifactCounts({ ...artifactCounts, "text": searchText })
             .then((response) => {
                 let [results, maxBoxCount] = rangeOfYearMonthsWithCounts(1990, 2021, response)
 
@@ -41,10 +40,24 @@ const Life2 = () => {
             });
     };
 
+    const secondaryCounts = async () => {
+
+        ArtifactAPI.artifactCounts({ ...artifactCounts, "text": searchText, "source": "secondary" })
+            .then((response) => {
+                let [results, maxBoxCount] = rangeOfYearMonthsWithCounts(1990, 2021, response)
+
+                setSecondaryCountsResponse(results);
+                setSecondaryMaxBoxCount(maxBoxCount);
+            })
+            .catch((e) => {
+                alert("error: " + e);
+            });
+    };
+
     const life2 = () => {
 
         let updatedSearch = {
-            ...searchRequest,
+            ...artifactSearch,
             after: undefined,
             before: undefined,
             who: [],
@@ -64,7 +77,7 @@ const Life2 = () => {
     const undated = () => {
 
         let updatedSearch = {
-            ...searchRequest,
+            ...artifactSearch,
             after: undefined,
             before: undefined,
             text: searchText
@@ -87,9 +100,12 @@ const Life2 = () => {
                         searchText={searchText}
                         setSearchText={setSearchText}
                         counts={counts}
+                        secondaryCounts={secondaryCounts}
                         countsResponse={countsResponse}
+                        secondaryCountsResponse={secondaryCountsResponse}
                         setSearchResponse={setSearchResponse}
-                        maxBoxCount={maxBoxCount} />
+                        maxBoxCount={maxBoxCount}
+                        secondaryMaxBoxCount={secondaryMaxBoxCount} />
                 </MDBCol>
                 <MDBCol md="6">
                     <MDBRow>

@@ -2,6 +2,7 @@ export interface ArtifactCountsRequest {
     owner: string;
     after: string;
     before: string;
+    source?: string;
     from?: string[];
     to?: string[];
     text?: string; 

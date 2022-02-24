@@ -6,21 +6,16 @@ import { artifactSearch } from "../../utils/requestTemplates.json";
 
 const MonthBox = (props) => {
 
-    const [searchRequest, setSearchRequest] = useState<ArtifactSearchRequest>(artifactSearch);
-    const [from, setFrom] = useState<string[]>([]);
-    const [to, setTo] = useState<string[]>([]);
-
-    const { searchText, monthBox, selected, index, maxBoxCount, setSearchResponse } = props;
+    const { searchText, monthBox, selected, index, maxBoxCount, setSearchResponse, source } = props;
     const { count, year, month, header} = monthBox;
     const after = startOfMonth(year, month);
     const before = endOfMonth(year, month)
     const request: ArtifactSearchRequest = {
-        ...searchRequest,
+        ...artifactSearch,
         "after" : after,
         "before" : before,
-        "from" : from,
-        "to" : to,
-        "text" : searchText
+        "text" : searchText,
+        "source" : source
     }
 
     const opacity = !header && count != 0 ? 0.1 + count * 1.2  / maxBoxCount : 1;

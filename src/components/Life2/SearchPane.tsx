@@ -8,9 +8,12 @@ const SearchPane = (props) => {
     const {
         searchText, 
         setSearchText, 
-        maxBoxCount, 
+        maxBoxCount,
+        secondaryMaxBoxCount,
         counts, 
-        countsResponse, 
+        secondaryCounts,
+        countsResponse,
+        secondaryCountsResponse,
         setSearchResponse
     } = props;
 
@@ -21,7 +24,7 @@ const SearchPane = (props) => {
                     <SearchPanel
                         searchText={searchText}
                         setSearchText={setSearchText}
-                        counts={counts}
+                        go={() => { counts(); secondaryCounts(); }}
                     />
                 </MDBCol>
             </MDBRow>
@@ -29,8 +32,6 @@ const SearchPane = (props) => {
                 <MDBCol md="6">
                     <CountGrid
                         searchText={searchText}
-                        setSearchText={setSearchText}
-                        counts={counts}
                         countsResponse={countsResponse}
                         maxBoxCount={maxBoxCount}
                         setSearchResponse={setSearchResponse}
@@ -39,11 +40,10 @@ const SearchPane = (props) => {
                 <MDBCol md="6">
                 <CountGrid
                         searchText={searchText}
-                        setSearchText={setSearchText}
-                        counts={counts}
-                        countsResponse={[]}
-                        maxBoxCount={maxBoxCount}
+                        countsResponse={secondaryCountsResponse}
+                        maxBoxCount={secondaryMaxBoxCount}
                         setSearchResponse={setSearchResponse}
+                        source={"secondary"}
                     />
                 </MDBCol>
             </MDBRow>

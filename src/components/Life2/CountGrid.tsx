@@ -4,7 +4,7 @@ import '../../styles/styles.css'
 
 const CountGrid = (props) => {
 
-    const { searchText, countsResponse, maxBoxCount, setSearchResponse } = props;
+    const { searchText, countsResponse, maxBoxCount, setSearchResponse, source } = props;
 
     return (
         <div className="grid" id="counts">
@@ -22,7 +22,8 @@ const CountGrid = (props) => {
                     monthBox={monthBox} 
                     selected={false} 
                     maxBoxCount={maxBoxCount}
-                    setSearchResponse={setSearchResponse} />
+                    setSearchResponse={setSearchResponse}
+                    source={source} />
                 )
             })}
         </div>

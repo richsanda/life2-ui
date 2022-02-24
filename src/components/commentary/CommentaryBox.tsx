@@ -206,7 +206,9 @@ const artifactTypes = [
   "apartment",
   "gathering",
   "party",
-  "house"
+  "house",
+  "place",
+  "mention"
 ]
 const fieldNames = [
   "from",

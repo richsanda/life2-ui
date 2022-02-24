@@ -23,11 +23,11 @@ const SearchPanel = (props) => {
     })
   }, [])
 
-  const { searchText, setSearchText, counts } = props;
+  const { searchText, setSearchText, go } = props;
 
   const onKeyPress = (event) => {
     if (event.key === 'Enter') {
-      counts();
+      go();
     }
   }
 
@@ -40,7 +40,7 @@ const SearchPanel = (props) => {
     <MDBContainer>
       <MDBRow>
         <MDBCol md="4">
-          <Button variant="primary" onClick={counts}>go</Button>
+          <Button variant="primary" onClick={go}>go</Button>
         </MDBCol>
         <MDBCol md="8">
           <CommentaryBox

@@ -5,5 +5,6 @@ export interface ArtifactSearchRequest {
     from?: string[];
     to?: string[];
     text?: string;
+    source?: string;
 }
   
