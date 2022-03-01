@@ -5,7 +5,7 @@ import { ArtifactCountsResponse } from "../models";
 function rangeOfYearMonthsWithCounts(start: number, end: number, results: ArtifactCountsResponse[]): [ArtifactCountsResponse[], number] {
 
     var countsByKey = {};
-    let max: number = 1;
+    let max: number = 0.01;
 
     for (var i = 0; i < results.length; i++) {
         let r = results[i];
@@ -49,7 +49,23 @@ function endOfMonth(year: number, month: number): string {
 }
 
 function prettyDate(datestr: string) {
-    return datestr ? moment(datestr).format("MMM DD, YYYY").toLowerCase() : "";
+    return datestr ? moment(datestr).format("D MMM YY").toLowerCase() : "";
+}
+
+function dateDiff(date1: Date, date2: Date) {
+    if (!date1 || !date2) return 0;
+    return moment(date2).diff(moment(date1));
+}
+
+function timelineFill(timelineStart: Date, timelineEnd: Date, fillStart: Date, fillEnd: Date) {
+    let total = dateDiff(timelineStart, timelineEnd);
+    let start = dateDiff(timelineStart, fillStart);
+    let width = dateDiff(fillStart, fillEnd);
+    if (! start) return [0, 0];
+    start = Math.round(100 * start / total);
+    if (! width) return [start, 1]
+    width = Math.round(Math.max(100 * width / total, 1));
+    return [start, width];
 }
 
 const noteExpression = /[#@!$]\[([a-zA-Z0-9._: -]*)\]\([a-zA-Z0-9._: -]*\)/g;
@@ -76,4 +92,4 @@ const updateToken = () => {
     sessionStorage.setItem("token", Buffer.from(`${username}:${password}`).toString('base64'));
 }
 
-export { rangeOfYearMonthsWithCounts, startOfMonth, endOfMonth, prettyDate, prettyNote, bodyify, preify, updateToken }
+export { rangeOfYearMonthsWithCounts, startOfMonth, endOfMonth, prettyDate, timelineFill, prettyNote, bodyify, preify, updateToken }

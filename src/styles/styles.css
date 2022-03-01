@@ -30,7 +30,6 @@ div.clickable:hover {
     display: table;
     text-align: left;
     table-layout: fixed;
-    margin: 10px;
     font-size: 0.85em;
 }
 
@@ -45,10 +44,11 @@ div.artifact-link-selected {
     display: table-row;
 }
 
-div.artifact-link-col {
+.artifact-link-col {
     padding: 2px;
     display: table-cell;
-    padding-right: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
     font-size: 0.85em;
 }
 
@@ -113,4 +113,21 @@ div.month-name {
     margin: 50px;
     padding: 10px;
     background-color: rgba(240, 240, 240, 1);
+}
+
+.row-timeline {
+    position: relative;
+    border-left: 1px solid #193057;
+    border-right: 1px solid #193057;
+    opacity: 50%;
+}
+
+.row-timeline-fill {
+    height: 100%;
+    width: 30%;
+    position: absolute;
+    top: 0;
+    left: 65%;
+    background-color: #193057;
+    z-index: 10;
 }

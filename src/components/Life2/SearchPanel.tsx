@@ -7,6 +7,8 @@ import ArtifactAPI from "../../hooks/artifactApi";
 
 const SearchPanel = (props) => {
 
+  const { searchText, setSearchText, numUpdates, go } = props;
+
   const [personOptions, setPersonOptions] = useState<Person[]>([]);
   const [troveOptions, setTroveOptions] = useState<Trove[]>([]);
   const [tagOptions, setTagOptions] = useState<Tag[]>([]);
@@ -21,9 +23,7 @@ const SearchPanel = (props) => {
     ArtifactAPI.tags().then((response) => {
       setTagOptions(response);
     })
-  }, [])
-
-  const { searchText, setSearchText, go } = props;
+  }, [numUpdates])
 
   const onKeyPress = (event) => {
     if (event.key === 'Enter') {

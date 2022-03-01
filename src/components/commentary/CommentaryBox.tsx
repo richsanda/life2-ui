@@ -5,23 +5,23 @@ import defaultMentionStyle from '../../styles/defaultMentionStyle'
 import { Person, Tag, Trove } from '../../models';
 
 interface CommentaryBoxProps {
-    value, 
-    onChange, 
-    onAdd, 
-    personOptions ?: Person[],
-    troveOptions ?: Trove[],
-    tagOptions ?: Tag[],
-    onKeyPress ?: any
+  value,
+  onChange,
+  onAdd,
+  personOptions?: Person[],
+  troveOptions?: Trove[],
+  tagOptions?: Tag[],
+  onKeyPress?: any
 }
 
-function CommentaryBox(props : CommentaryBoxProps) {
+function CommentaryBox(props: CommentaryBoxProps) {
 
-  const { 
-    value, 
-    onChange, 
-    onAdd, 
-    personOptions = [], 
-    troveOptions = [], 
+  const {
+    value = '',
+    onChange,
+    onAdd,
+    personOptions = [],
+    troveOptions = [],
     tagOptions = [],
     onKeyPress } = props;
 
@@ -29,6 +29,7 @@ function CommentaryBox(props : CommentaryBoxProps) {
     <div>
 
       <MentionsInput
+        autoFocus
         value={value}
         onChange={onChange}
         onKeyPress={onKeyPress}
@@ -77,7 +78,7 @@ function CommentaryBox(props : CommentaryBoxProps) {
         <Mention
           markup="#[__display__](tag:__id__)"
           trigger="#"
-          data={tagOptions.map((p) => { return { id: p.name, display: p.name }})}
+          data={tagOptions.map((p) => { return { id: p.name, display: p.name } })}
           renderSuggestion={(
             suggestion,
             search,
@@ -177,7 +178,9 @@ const artifactTypes = [
   "postcard",
   "ticket",
   "printout",
+  "flier",
   "note",
+  "notebook",
   "envelope",
   "paystub",
   "appointment",
@@ -192,6 +195,7 @@ const artifactTypes = [
   "art",
   "school",
   "schoolwork",
+  "work",
   "program",
   "boarding",
   "certificate",
@@ -208,7 +212,13 @@ const artifactTypes = [
   "party",
   "house",
   "place",
-  "mention"
+  "mention",
+  "era",
+  "residence",
+  "roadtrip",
+  "songs",
+  "stateline",
+  "mixtape"
 ]
 const fieldNames = [
   "from",
@@ -218,6 +228,7 @@ const fieldNames = [
   "page",
   "when",
   "where",
+  "why",
   "balance",
   "deposit",
   "withdrawal",

@@ -6,12 +6,12 @@ import ArtifactModal from "./ArtifactModal";
 
 const NewArtifactButton = (props) => {
 
-    const { onSave } = props;
+    const { onUpdate } = props;
 
     const [show, setShow] = useState(false);
     const handleAdd = () => { setCommentary(''); setNotes([]); setShow(true); }
     const handleClose = () => { setShow(false); }
-    const handleSave = () => { handleClose(); addNote(); onSave(); }
+    const handleSave = () => { handleClose(); addNote(); }
 
     const [commentary, setCommentary] = useState('');
     const [notes, setNotes] = useState<string[]>([])
@@ -20,13 +20,17 @@ const NewArtifactButton = (props) => {
 
         const trove = "life2";
         let updatedNote = {
-          trove: trove,
-          text: commentary,
-          notes: notes
+            trove: trove,
+            text: commentary,
+            notes: notes
         }
-    
-        ArtifactAPI.addNote(trove, updatedNote);
-      }
+
+        ArtifactAPI.addNote(trove, updatedNote)
+            .then((response) => {
+                console.log("added new note")
+                onUpdate();
+            })
+    }
 
     return (
         <>

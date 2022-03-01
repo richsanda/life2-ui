@@ -17,6 +17,12 @@ const Life2 = () => {
         updateToken();
     }, [])
 
+    const [numUpdates, setNumUpdates] = useState(0);
+
+    const onUpdate = () => {
+        setNumUpdates(numUpdates + 1);
+    }
+
     const [searchText, setSearchText] = useState('');
 
     const [countsResponse, setCountsResponse] = useState<ArtifactCountsResponse[]>([]);
@@ -105,12 +111,13 @@ const Life2 = () => {
                         secondaryCountsResponse={secondaryCountsResponse}
                         setSearchResponse={setSearchResponse}
                         maxBoxCount={maxBoxCount}
-                        secondaryMaxBoxCount={secondaryMaxBoxCount} />
+                        secondaryMaxBoxCount={secondaryMaxBoxCount}
+                        numUpdates={numUpdates} />
                 </MDBCol>
                 <MDBCol md="6">
                     <MDBRow>
                         <MDBCol md="12">
-                            <NewArtifactButton onSave={life2} />
+                            <NewArtifactButton onUpdate={onUpdate} />
                             &nbsp;&nbsp;
                             <Button variant="primary" onClick={life2}>&#8635;</Button>
                             &nbsp;&nbsp;
@@ -119,7 +126,10 @@ const Life2 = () => {
                     </MDBRow>
                     <MDBRow>
                         <MDBCol md="12" className="scrollable">
-                            <SearchResults searchResponse={searchResponse} />
+                            <SearchResults
+                                searchResponse={searchResponse}
+                                numUpdates={numUpdates}
+                                onUpdate={onUpdate} />
                         </MDBCol>
                     </MDBRow>
                 </MDBCol>

@@ -1,6 +1,5 @@
 import { FunctionComponent } from "react";
 import "./styles/styles.css";
-import "./styles/neat.css";
 import { Route, Switch } from "react-router-dom";
 import ErrorBoundary from "./ErrorBoundary";
 import Life2 from "./pages/Life2";

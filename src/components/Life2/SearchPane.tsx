@@ -6,15 +6,16 @@ import '../../styles/life2.css';
 const SearchPane = (props) => {
 
     const {
-        searchText, 
-        setSearchText, 
+        searchText,
+        setSearchText,
         maxBoxCount,
         secondaryMaxBoxCount,
-        counts, 
+        counts,
         secondaryCounts,
         countsResponse,
         secondaryCountsResponse,
-        setSearchResponse
+        setSearchResponse,
+        numUpdates
     } = props;
 
     return (
@@ -25,6 +26,7 @@ const SearchPane = (props) => {
                         searchText={searchText}
                         setSearchText={setSearchText}
                         go={() => { counts(); secondaryCounts(); }}
+                        numUpdates={numUpdates}
                     />
                 </MDBCol>
             </MDBRow>
@@ -38,7 +40,7 @@ const SearchPane = (props) => {
                     />
                 </MDBCol>
                 <MDBCol md="6">
-                <CountGrid
+                    <CountGrid
                         searchText={searchText}
                         countsResponse={secondaryCountsResponse}
                         maxBoxCount={secondaryMaxBoxCount}

@@ -27,7 +27,8 @@ const ArtifactModal = (props) => {
         handleSelect,
         handleChange,
         handleSave,
-        handleClose } = props;
+        handleClose,
+        numUpdates } = props;
 
     const [personOptions, setPersonOptions] = useState<Person[]>([]);
     const [tagOptions, setTagOptions] = useState<Tag[]>([]);
@@ -39,12 +40,12 @@ const ArtifactModal = (props) => {
         ArtifactAPI.tags().then((response) => {
             setTagOptions(response);
         })
-    }, [])
+    }, [numUpdates])
 
     const [activeKey, setActiveKey] = useState<number>(0);
 
     const onCreateNote = (content) => {
-        if ( commentary ) {
+        if (commentary) {
             addNote(content);
         } else {
             setCommentary(content);
