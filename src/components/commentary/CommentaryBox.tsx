@@ -218,7 +218,22 @@ const artifactTypes = [
   "roadtrip",
   "songs",
   "stateline",
-  "mixtape"
+  "mixtape",
+  "bib",
+  "violation",
+  "itinerary",
+  "invite",
+  "wedding",
+  "map",
+  "scorecard",
+  "towing",
+  "roadrace",
+  "menu",
+  "phone",
+  "scan",
+  "document",
+  "instructions",
+  "clipping"
 ]
 const fieldNames = [
   "from",
@@ -229,6 +244,7 @@ const fieldNames = [
   "when",
   "where",
   "why",
+  "who",
   "balance",
   "deposit",
   "withdrawal",
